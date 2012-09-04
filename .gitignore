@@ -1,0 +1,7 @@
+#Working Dir
+objs/
+lib/
+
+#TARGET
+*_tests
+*.exe
