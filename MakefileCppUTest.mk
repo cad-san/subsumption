@@ -13,13 +13,16 @@ PROJECT_HOME_DIR = .
 
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src\
+	$(PROJECT_HOME_DIR)/src/agent\
 
 TEST_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/tests\
+	$(PROJECT_HOME_DIR)/tests/agent\
 	
 INCLUDE_DIRS =\
 	$(CPPUTEST_HOME)/include\
 	$(PROJECT_HOME_DIR)/include\
+	$(PROJECT_HOME_DIR)/include/agent\
 	$(PROJECT_HOME_DIR)/mocks\
 
 MOCKS_SRC_DIRS = \
