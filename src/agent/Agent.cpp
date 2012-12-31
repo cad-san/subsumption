@@ -8,7 +8,17 @@ Agent::~Agent()
 {
 }
 
-int Agent::getNumLayers()
+int Agent::getNumBehaviors()
 {
-    return 0;
+    return behaviors.size();
+}
+
+void Agent::addBehavior(Behavior* new_behavior)
+{
+    behaviors.push_back(BehaviorPtr(new_behavior));
+}
+
+Behavior& Agent::getBehaviorAt(int layer)
+{
+    return *behaviors.at(layer);
 }

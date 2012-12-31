@@ -27,8 +27,10 @@ INCLUDE_DIRS =\
 
 MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks\
+	$(PROJECT_HOME_DIR)/mocks/agent\
 
-CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror 
+CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror\
+						-include tests/PreIncludeFiles.h
 CPPUTEST_CFLAGS += -Wall -Wstrict-prototypes -pedantic
 LD_LIBRARIES = -lpthread
 	
