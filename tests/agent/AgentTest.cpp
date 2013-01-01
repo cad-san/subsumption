@@ -29,9 +29,9 @@ TEST(Agent, Create)
 
 TEST(Agent, AttachSingleLayer)
 {
-    Behavior* behavior = new SpyBehavior(dummy_id_01);
-    agent->addBehavior(behavior);
+    agent->addBehavior(new SpyBehavior(dummy_id_01));
     LONGS_EQUAL(1, agent->getNumBehaviors());
+    LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(0).getID())
 }
 
 TEST(Agent, AttachMaltipleLayer)
@@ -41,4 +41,30 @@ TEST(Agent, AttachMaltipleLayer)
     LONGS_EQUAL(2, agent->getNumBehaviors());
     LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(0).getID())
     LONGS_EQUAL(dummy_id_02, agent->getBehaviorAt(1).getID())
+}
+
+TEST(Agent, SingleBehaviorStep)
+{
+    SpyBehavior* behavior = new SpyBehavior(dummy_id_01);
+    agent->addBehavior(behavior);
+    
+    agent->step();
+    CHECK(behavior->senced());
+    CHECK(behavior->performed());
+}
+
+TEST(Agent, MultipleBehaviorStep)
+{
+    SpyBehavior* lawer_behavior = new SpyBehavior(dummy_id_01);
+    SpyBehavior* higher_behavior = new SpyBehavior(dummy_id_02);
+    
+    agent->addBehavior(lawer_behavior);
+    agent->addBehavior(higher_behavior);
+    
+    agent->step();
+    
+    CHECK_EQUAL(true, lawer_behavior->senced());
+    CHECK_EQUAL(true, higher_behavior->senced());
+    CHECK_EQUAL(false, lawer_behavior->performed());
+    CHECK_EQUAL(true, higher_behavior->performed());
 }

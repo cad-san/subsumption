@@ -8,6 +8,25 @@ Agent::~Agent()
 {
 }
 
+void Agent::step()
+{
+    int active_behavior = -1;
+    for(unsigned int i = 0; i < behaviors.size(); i++)
+    {
+        // sencingの実行
+        behaviors.at(i)->sencing();
+        // 後のBehaviorを優先する
+        if(behaviors.at(i)->isActive())
+            active_behavior = i;
+    }
+   
+    // ActiveなBehaviorが無いなら何もしない
+    if(active_behavior == -1)
+        return;
+
+    behaviors.at(active_behavior)->perform();
+}
+
 int Agent::getNumBehaviors()
 {
     return behaviors.size();

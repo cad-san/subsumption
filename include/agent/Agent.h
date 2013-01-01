@@ -16,6 +16,8 @@ public:
     Agent();
     ~Agent();
     
+    void step();
+    
     int getNumBehaviors();
     void addBehavior(Behavior* new_behavior);
     Behavior& getBehaviorAt(int layer);

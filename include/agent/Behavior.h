@@ -7,6 +7,11 @@ protected:
 public:
     virtual ~Behavior(){}
 
+    virtual void sencing() = 0;
+    virtual void perform() = 0;
+
+    virtual bool isActive() = 0;
+
     int getID(){ return id; }
 };
 
