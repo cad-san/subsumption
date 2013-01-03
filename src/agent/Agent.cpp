@@ -37,7 +37,10 @@ void Agent::addBehavior(Behavior* new_behavior)
     behaviors.push_back(BehaviorPtr(new_behavior));
 }
 
-Behavior& Agent::getBehaviorAt(int layer)
+Behavior* Agent::getBehaviorAt(unsigned int layer)
 {
-    return *behaviors.at(layer);
+    if( layer >= behaviors.size() )
+        return NULL;
+    
+    return behaviors.at(layer).get();
 }

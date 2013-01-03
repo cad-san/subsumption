@@ -20,7 +20,7 @@ public:
     
     int getNumBehaviors();
     void addBehavior(Behavior* new_behavior);
-    Behavior& getBehaviorAt(int layer);
+    Behavior* getBehaviorAt(unsigned int layer);
 };
 
 #endif
