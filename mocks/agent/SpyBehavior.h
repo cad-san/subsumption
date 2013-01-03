@@ -9,7 +9,7 @@ private:
     bool sencing_flag;
     bool perform_flag;
 public:
-    explicit SpyBehavior(int id);
+    explicit SpyBehavior(const unsigned int id);
     ~SpyBehavior();
 
     void sencing();

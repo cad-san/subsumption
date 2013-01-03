@@ -3,7 +3,7 @@
 
 class Behavior {
 protected:
-    int id;
+    unsigned int id;
 public:
     virtual ~Behavior(){}
 
@@ -12,7 +12,7 @@ public:
 
     virtual const bool isActive() const = 0;
 
-    const int getID() const { return id; }
+    const unsigned int getID() const { return id; }
 };
 
 #endif

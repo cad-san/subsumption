@@ -46,3 +46,14 @@ const Behavior* Agent::getBehaviorAt(const unsigned int layer) const
 
     return behaviors.at(layer).get();
 }
+
+const Behavior* Agent::getBehaviorByID(const unsigned int id) const
+{
+    for(unsigned int i = 0; i < behaviors.size(); i++)
+    {
+        if(behaviors.at(i)->getID() == id)
+            return behaviors.at(i).get();
+    }
+    // ヒットしなかった
+    return NULL;
+}

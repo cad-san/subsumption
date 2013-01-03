@@ -22,7 +22,8 @@ public:
     
     const int getNumBehaviors() const;
     void addBehavior(Behavior* const new_behavior);
-    const Behavior* getBehaviorAt(unsigned int layer) const;
+    const Behavior* getBehaviorAt(const unsigned int layer) const;
+    const Behavior* getBehaviorByID(const unsigned int id) const;
 };
 
 #endif

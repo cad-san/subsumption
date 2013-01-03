@@ -1,6 +1,6 @@
 #include "SpyBehavior.h"
 
-SpyBehavior::SpyBehavior(int id)
+SpyBehavior::SpyBehavior(const unsigned int id)
 {
     this->id = id;
     this->sencing_flag = false;

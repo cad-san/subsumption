@@ -5,8 +5,8 @@
 
 #include <vector>
 
-static const int dummy_id_01 = 0x01;
-static const int dummy_id_02 = 0x02;
+static const unsigned int dummy_id_01 = 0x01;
+static const unsigned int dummy_id_02 = 0x02;
 
 TEST_GROUP(Agent)
 {
@@ -69,7 +69,20 @@ TEST(Agent, MultipleBehaviorStep)
     CHECK_EQUAL(true, higher_behavior->performed());
 }
 
+TEST(Agent, GetWithBehaviorID)
+{
+    SpyBehavior* lawer_behavior = new SpyBehavior(dummy_id_01);
+    SpyBehavior* higher_behavior = new SpyBehavior(dummy_id_02);
+    agent->addBehavior(lawer_behavior);
+    agent->addBehavior(higher_behavior);
+
+    LONGS_EQUAL(dummy_id_01, agent->getBehaviorByID(dummy_id_01)->getID());
+    LONGS_EQUAL(dummy_id_02, agent->getBehaviorByID(dummy_id_02)->getID());
+}
+
 TEST(Agent, GetNotAttachedBehavior)
 {
     CHECK_EQUAL(NULL, agent->getBehaviorAt(0));
+    CHECK_EQUAL(NULL, agent->getBehaviorByID(dummy_id_01));
 }
+
