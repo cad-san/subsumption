@@ -8,6 +8,8 @@
 static const unsigned int dummy_id_01 = 0x01;
 static const unsigned int dummy_id_02 = 0x02;
 
+typedef std::vector<SpyBehavior *> SpyBehaviorList;
+
 TEST_GROUP(Agent)
 {
     Agent *agent;
@@ -19,6 +21,29 @@ TEST_GROUP(Agent)
     void teardown()
     {
         delete agent;
+    }
+
+    int createBehaviors( unsigned int id_list[], unsigned int size,
+            SpyBehaviorList* behavior_list)
+    {
+        if(id_list == NULL || size < 1)
+            return -1;
+
+        if(behavior_list == NULL)
+            return -1;
+
+        behavior_list->clear();
+        for(unsigned int i = 0; i < size; i++)
+        {
+            behavior_list->push_back( new SpyBehavior(id_list[i]) );
+        }
+        return 0;
+    }
+
+    void setBehaviorsToAgent(SpyBehaviorList* behaviors)
+    {
+        for(unsigned int i = 0; i < behaviors->size(); i++)
+            agent->addBehavior(behaviors->at(i));
     }
 };
 
@@ -36,8 +61,12 @@ TEST(Agent, AttachSingleLayer)
 
 TEST(Agent, AttachMaltipleLayer)
 {
-    agent->addBehavior(new SpyBehavior(dummy_id_01));
-    agent->addBehavior(new SpyBehavior(dummy_id_02));
+    unsigned int id_list[] = {dummy_id_01, dummy_id_02};
+    SpyBehaviorList behaviors;
+
+    createBehaviors(id_list, 2, &behaviors);
+    setBehaviorsToAgent(&behaviors);
+
     LONGS_EQUAL(2, agent->getNumBehaviors());
     LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(0)->getID())
     LONGS_EQUAL(dummy_id_02, agent->getBehaviorAt(1)->getID())
@@ -47,38 +76,39 @@ TEST(Agent, SingleBehaviorStep)
 {
     SpyBehavior* behavior = new SpyBehavior(dummy_id_01);
     agent->addBehavior(behavior);
-    
+
     agent->step();
+
     CHECK(behavior->senced());
     CHECK(behavior->performed());
 }
 
 TEST(Agent, MultipleBehaviorStep)
 {
-    SpyBehavior* lawer_behavior = new SpyBehavior(dummy_id_01);
-    SpyBehavior* higher_behavior = new SpyBehavior(dummy_id_02);
-    
-    agent->addBehavior(lawer_behavior);
-    agent->addBehavior(higher_behavior);
-    
+    unsigned int id_list[] = {dummy_id_01, dummy_id_02};
+    SpyBehaviorList behaviors;
+
+    createBehaviors(id_list, 2, &behaviors);
+    setBehaviorsToAgent(&behaviors);
+
     agent->step();
-    
-    CHECK_EQUAL(true, lawer_behavior->senced());
-    CHECK_EQUAL(true, higher_behavior->senced());
-    CHECK_EQUAL(false, lawer_behavior->performed());
-    CHECK_EQUAL(true, higher_behavior->performed());
+
+    CHECK_EQUAL(true,  behaviors.at(0)->senced());
+    CHECK_EQUAL(true,  behaviors.at(1)->senced());
+    CHECK_EQUAL(false, behaviors.at(0)->performed());
+    CHECK_EQUAL(true,  behaviors.at(1)->performed());
 }
 
 TEST(Agent, GetWithBehaviorID)
 {
-    SpyBehavior* lawer_behavior = new SpyBehavior(dummy_id_01);
-    SpyBehavior* higher_behavior = new SpyBehavior(dummy_id_02);
+    unsigned int id_list[] = {dummy_id_01, dummy_id_02};
+    SpyBehaviorList behaviors;
 
-    agent->addBehavior(lawer_behavior);
-    agent->addBehavior(higher_behavior);
+    createBehaviors(id_list, 2, &behaviors);
+    setBehaviorsToAgent(&behaviors);
 
-    LONGS_EQUAL(dummy_id_01, agent->getBehaviorByID(dummy_id_01)->getID());
-    LONGS_EQUAL(dummy_id_02, agent->getBehaviorByID(dummy_id_02)->getID());
+    POINTERS_EQUAL(behaviors.at(0), agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(behaviors.at(1), agent->getBehaviorByID(dummy_id_02));
 }
 
 TEST(Agent, GetNotAttachedBehavior)
