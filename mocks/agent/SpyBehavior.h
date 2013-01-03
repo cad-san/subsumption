@@ -15,7 +15,7 @@ public:
     void sencing();
     void perform();
 
-    bool isActive();
+    const bool isActive() const;
 
     bool senced();
     bool performed();

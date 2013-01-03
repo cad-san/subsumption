@@ -10,6 +10,8 @@ typedef boost::shared_ptr<Behavior> BehaviorPtr;
 
 class Agent
 {
+public:
+    static const int INVALID_INDEX;
 private:
     std::vector< BehaviorPtr > behaviors;
 public:
@@ -18,9 +20,9 @@ public:
     
     void step();
     
-    int getNumBehaviors();
-    void addBehavior(Behavior* new_behavior);
-    Behavior* getBehaviorAt(unsigned int layer);
+    const int getNumBehaviors() const;
+    void addBehavior(Behavior* const new_behavior);
+    const Behavior* getBehaviorAt(unsigned int layer) const;
 };
 
 #endif

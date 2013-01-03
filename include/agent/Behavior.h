@@ -10,9 +10,9 @@ public:
     virtual void sencing() = 0;
     virtual void perform() = 0;
 
-    virtual bool isActive() = 0;
+    virtual const bool isActive() const = 0;
 
-    int getID(){ return id; }
+    const int getID() const { return id; }
 };
 
 #endif

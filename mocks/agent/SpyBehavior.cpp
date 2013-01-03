@@ -35,7 +35,7 @@ void SpyBehavior::perform()
         perform_flag = false;
 }
 
-bool SpyBehavior::isActive()
+const bool SpyBehavior::isActive() const
 {
     return sencing_flag;
 }
