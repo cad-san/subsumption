@@ -73,6 +73,7 @@ TEST(Agent, GetWithBehaviorID)
 {
     SpyBehavior* lawer_behavior = new SpyBehavior(dummy_id_01);
     SpyBehavior* higher_behavior = new SpyBehavior(dummy_id_02);
+
     agent->addBehavior(lawer_behavior);
     agent->addBehavior(higher_behavior);
 
@@ -84,5 +85,17 @@ TEST(Agent, GetNotAttachedBehavior)
 {
     CHECK_EQUAL(NULL, agent->getBehaviorAt(0));
     CHECK_EQUAL(NULL, agent->getBehaviorByID(dummy_id_01));
+}
+
+TEST(Agent, DisableToAttachSameID)
+{
+    SpyBehavior* first_behavior = new SpyBehavior(dummy_id_01);
+    SpyBehavior* second_behavior = new SpyBehavior(dummy_id_01);
+
+    agent->addBehavior(first_behavior);
+    POINTERS_EQUAL(first_behavior, agent->getBehaviorByID(dummy_id_01));
+
+    agent->addBehavior(second_behavior);
+    POINTERS_EQUAL(second_behavior, agent->getBehaviorByID(dummy_id_01));
 }
 
