@@ -113,8 +113,8 @@ TEST(Agent, GetWithBehaviorID)
 
 TEST(Agent, GetNotAttachedBehavior)
 {
-    CHECK_EQUAL(NULL, agent->getBehaviorAt(0));
-    CHECK_EQUAL(NULL, agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(NULL, agent->getBehaviorAt(0));
+    POINTERS_EQUAL(NULL, agent->getBehaviorByID(dummy_id_01));
 }
 
 TEST(Agent, DisableToAttachSameID)
