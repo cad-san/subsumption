@@ -23,7 +23,7 @@ void Agent::step()
         if(behaviors.at(i)->isActive())
             active_behavior = i;
     }
-   
+
     // ActiveなBehaviorが無いなら何もしない
     if(active_behavior == INVALID_LAYER)
         return;
@@ -48,12 +48,12 @@ void Agent::addBehavior(Behavior* const new_behavior)
 
 void Agent::removeBehaviorAt(unsigned int layer)
 {
-   if( !isValidLayer(layer) )
-       return;
+    if( !isValidLayer(layer) )
+        return;
 
-   BehaviorPtr target = behaviors.at(layer);
-    behaviors.erase(std::remove(behaviors.begin(), behaviors.end(), target), 
-            behaviors.end());
+    BehaviorPtr target = behaviors.at(layer);
+    behaviors.erase(std::remove(behaviors.begin(), behaviors.end(), target),
+                    behaviors.end());
 }
 
 const Behavior* Agent::getBehaviorAt(const unsigned int layer) const

@@ -24,7 +24,7 @@ TEST_GROUP(Agent)
     }
 
     int createBehaviors( unsigned int id_list[], unsigned int size,
-            SpyBehaviorList* behavior_list)
+                         SpyBehaviorList* behavior_list)
     {
         if(id_list == NULL || size < 1)
             return -1;
