@@ -3,10 +3,10 @@ all: codeCppUTest
 
 clean: cleanCodeCppUTest
 
-cleanCode: cleanCodeCppUTest 
+cleanCode: cleanCodeCppUTest
 
 codeCppUTest: CppUTest CppUTestExt
-	make -i -f MakefileCppUTest.mk 
+	make -i -f MakefileCppUTest.mk
 
 cleanCodeCppUTest:
 	make -i -f MakefileCppUTest.mk clean
@@ -21,3 +21,6 @@ CppUTest/lib/libCppUTest.a:
 
 CppUTest/lib/libCppUTestExt.a:
 	make -i -C CppUTest extensions
+
+format:
+	make -i -f MakefileCppUTest.mk uncrustify
