@@ -8,3 +8,7 @@ lib/
 
 #formatter files
 *.uncrustify
+
+#gcov
+gcov/
+*_tests.txt

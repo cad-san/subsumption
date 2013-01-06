@@ -32,10 +32,13 @@ MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks\
 	$(PROJECT_HOME_DIR)/mocks/agent\
 
+#---- Setting ----#
 CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror
 CPPUTEST_CFLAGS += -Wall -Wstrict-prototypes -pedantic
 CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
 LD_LIBRARIES = -lpthread
+
+CPPUTEST_USE_GCOV = Y
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 

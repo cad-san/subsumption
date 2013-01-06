@@ -24,3 +24,6 @@ CppUTest/lib/libCppUTestExt.a:
 
 format:
 	make -i -f MakefileCppUTest.mk uncrustify
+
+gcov:
+	make -i -f MakefileCppUTest.mk gcov
