@@ -6,8 +6,9 @@
 class SpyBehavior : public Behavior
 {
 private:
-    bool sencing_flag;
-    bool perform_flag;
+    bool activation;
+    bool sencing_state;
+    bool perform_state;
 public:
     explicit SpyBehavior(const unsigned int id);
     ~SpyBehavior();
@@ -19,6 +20,8 @@ public:
 
     bool senced();
     bool performed();
+
+    void setActivation(const bool activation);
 };
 
 #endif

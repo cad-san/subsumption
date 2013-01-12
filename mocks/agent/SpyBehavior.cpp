@@ -3,8 +3,9 @@
 SpyBehavior::SpyBehavior(const unsigned int id)
 {
     this->id = id;
-    this->sencing_flag = false;
-    this->perform_flag = false;
+    this->activation = true;
+    this->sencing_state = false;
+    this->perform_state = false;
 }
 
 SpyBehavior::~SpyBehavior()
@@ -13,29 +14,34 @@ SpyBehavior::~SpyBehavior()
 
 bool SpyBehavior::senced()
 {
-    return sencing_flag;
+    return sencing_state;
 }
 
 bool SpyBehavior::performed()
 {
-    return perform_flag;
+    return perform_state;
 }
 
 void SpyBehavior::sencing()
 {
-    perform_flag = false;
-    sencing_flag = true;
+    perform_state = false;
+    sencing_state = true;
 }
 
 void SpyBehavior::perform()
 {
-    if(sencing_flag)
-        perform_flag = true;
+    if(sencing_state)
+        perform_state = true;
     else
-        perform_flag = false;
+        perform_state = false;
 }
 
 const bool SpyBehavior::isActive() const
 {
-    return sencing_flag;
+    return activation && sencing_state;
+}
+
+void SpyBehavior::setActivation(const bool activation)
+{
+    this->activation = activation;
 }

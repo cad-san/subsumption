@@ -99,6 +99,25 @@ TEST(Agent, MultipleBehaviorStep)
     CHECK_EQUAL(true,  behaviors.at(1)->performed());
 }
 
+TEST(Agent, NoActivatedBehaviorStep)
+{
+    unsigned int id_list[] = {dummy_id_01, dummy_id_02};
+    SpyBehaviorList behaviors;
+
+    createBehaviors(id_list, 2, &behaviors);
+    setBehaviorsToAgent(&behaviors);
+
+    behaviors[0]->setActivation(false);
+    behaviors[1]->setActivation(false);
+
+    agent->step();
+
+    CHECK_EQUAL(true,  behaviors.at(0)->senced());
+    CHECK_EQUAL(true,  behaviors.at(1)->senced());
+    CHECK_EQUAL(false, behaviors.at(0)->performed());
+    CHECK_EQUAL(false, behaviors.at(1)->performed());
+}
+
 TEST(Agent, GetWithBehaviorID)
 {
     unsigned int id_list[] = {dummy_id_01, dummy_id_02};
