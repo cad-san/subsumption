@@ -14,14 +14,17 @@ PROJECT_HOME_DIR = .
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src\
 	$(PROJECT_HOME_DIR)/src/agent\
+	$(PROJECT_HOME_DIR)/src/environment\
 
 TEST_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/tests\
 	$(PROJECT_HOME_DIR)/tests/agent\
+	$(PROJECT_HOME_DIR)/tests/environment\
 
 INC_DIRS = \
 	$(PROJECT_HOME_DIR)/include\
 	$(PROJECT_HOME_DIR)/include/agent\
+	$(PROJECT_HOME_DIR)/include/environment\
 	$(PROJECT_HOME_DIR)/mocks\
 
 INCLUDE_DIRS = \
@@ -31,6 +34,7 @@ INCLUDE_DIRS = \
 MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks\
 	$(PROJECT_HOME_DIR)/mocks/agent\
+	$(PROJECT_HOME_DIR)/mocks/environment\
 
 #---- Setting ----#
 CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror
