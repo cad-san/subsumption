@@ -17,8 +17,8 @@ void Agent::step()
     int active_behavior = INVALID_LAYER;
     for(unsigned int i = 0; i < behaviors.size(); i++)
     {
-        // sencingの実行
-        behaviors.at(i)->sencing();
+        // sensingの実行
+        behaviors.at(i)->sensing();
         // 後のBehaviorを優先する
         if(behaviors.at(i)->isActive())
             active_behavior = i;

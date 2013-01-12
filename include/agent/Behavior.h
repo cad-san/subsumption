@@ -7,7 +7,7 @@ protected:
 public:
     virtual ~Behavior(){}
 
-    virtual void sencing() = 0;
+    virtual void sensing() = 0;
     virtual void perform() = 0;
 
     virtual const bool isActive() const = 0;

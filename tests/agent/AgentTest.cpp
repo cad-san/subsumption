@@ -79,7 +79,7 @@ TEST(Agent, SingleBehaviorStep)
 
     agent->step();
 
-    CHECK(behavior->senced());
+    CHECK(behavior->sensed());
     CHECK(behavior->performed());
 }
 
@@ -93,8 +93,8 @@ TEST(Agent, MultipleBehaviorStep)
 
     agent->step();
 
-    CHECK_EQUAL(true,  behaviors.at(0)->senced());
-    CHECK_EQUAL(true,  behaviors.at(1)->senced());
+    CHECK_EQUAL(true,  behaviors.at(0)->sensed());
+    CHECK_EQUAL(true,  behaviors.at(1)->sensed());
     CHECK_EQUAL(false, behaviors.at(0)->performed());
     CHECK_EQUAL(true,  behaviors.at(1)->performed());
 }
@@ -112,8 +112,8 @@ TEST(Agent, NoActivatedBehaviorStep)
 
     agent->step();
 
-    CHECK_EQUAL(true,  behaviors.at(0)->senced());
-    CHECK_EQUAL(true,  behaviors.at(1)->senced());
+    CHECK_EQUAL(true,  behaviors.at(0)->sensed());
+    CHECK_EQUAL(true,  behaviors.at(1)->sensed());
     CHECK_EQUAL(false, behaviors.at(0)->performed());
     CHECK_EQUAL(false, behaviors.at(1)->performed());
 }

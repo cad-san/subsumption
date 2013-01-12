@@ -7,18 +7,18 @@ class SpyBehavior : public Behavior
 {
 private:
     bool activation;
-    bool sencing_state;
+    bool sensing_state;
     bool perform_state;
 public:
     explicit SpyBehavior(const unsigned int id);
     ~SpyBehavior();
 
-    void sencing();
+    void sensing();
     void perform();
 
     const bool isActive() const;
 
-    bool senced();
+    bool sensed();
     bool performed();
 
     void setActivation(const bool activation);
