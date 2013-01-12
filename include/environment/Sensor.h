@@ -3,8 +3,11 @@
 
 class Sensor
 {
+protected:
+    unsigned int id;
 public:
     virtual ~Sensor() {};
+    const unsigned int getId() const { return id; };
 };
 
 #endif

@@ -18,6 +18,7 @@ public:
     ~Environment();
     void addSensor(std::string name, Sensor* sensor);
 
+    const Sensor* getSensorByName(std::string name) const;
     const int getNumSensor() const;
 };
 #endif

@@ -27,3 +27,16 @@ TEST(Environment, AddSensor)
     env->addSensor(STR(dummy_id_01), senser);
     LONGS_EQUAL(1, env->getNumSensor());
 }
+
+TEST(Environment, AddMultipleSensor)
+{
+    MockSensor* senser_1 = new MockSensor(dummy_id_01);
+    MockSensor* senser_2 = new MockSensor(dummy_id_02);
+    env->addSensor(STR(dummy_id_01), senser_1);
+    env->addSensor(STR(dummy_id_02), senser_2);
+
+    LONGS_EQUAL(2, env->getNumSensor());
+
+    LONGS_EQUAL(dummy_id_01, env->getSensorByName(STR(dummy_id_01))->getId());
+    LONGS_EQUAL(dummy_id_02, env->getSensorByName(STR(dummy_id_02))->getId());
+}
