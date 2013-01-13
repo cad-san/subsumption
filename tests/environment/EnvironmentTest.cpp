@@ -90,6 +90,12 @@ TEST(Environment, AddMultipleSensor)
     checkSensorsInEnv(names, &sensors);
 }
 
+TEST(Environment, NoSensorInEnvironment)
+{
+    LONGS_EQUAL(0, env->getNumSensor());
+    POINTERS_EQUAL(NULL, env->getSensorByName("not_exist_sensor"));
+}
+
 TEST(Environment, SingleSensorControl)
 {
     MockSensor* sensor = new MockSensor(dummy_name_01);
