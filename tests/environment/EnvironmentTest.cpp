@@ -1,4 +1,5 @@
-#include "cpputest/TestHarness.h"
+#include "CppUTest/TestHarness.h"
+#include "CppUTestExt/MockSupport.h"
 
 #include "Environment.h"
 #include "MockSensor.h"
@@ -17,6 +18,7 @@ TEST_GROUP(Environment)
     }
     void teardown()
     {
+        mock().clear();
         delete env;
     }
 };
@@ -39,4 +41,18 @@ TEST(Environment, AddMultipleSensor)
 
     LONGS_EQUAL(dummy_id_01, env->getSensorByName(STR(dummy_id_01))->getId());
     LONGS_EQUAL(dummy_id_02, env->getSensorByName(STR(dummy_id_02))->getId());
+}
+
+TEST(Environment, SingleSensorControl)
+{
+    MockSensor* sensor = new MockSensor(dummy_id_01);
+    env->addSensor(STR(dummy_id_01), sensor);
+
+    mock().expectOneCall("Sensor#init()").onObject(sensor);
+    env->init();
+    mock().expectOneCall("Sensor#start()").onObject(sensor);
+    env->start();
+    mock().expectOneCall("Sensor#stop()").onObject(sensor);
+    env->stop();
+    mock().checkExpectations();
 }

@@ -9,6 +9,12 @@ class MockSensor : public Sensor
 public:
     MockSensor(const unsigned int id);
     ~MockSensor();
+
+    void init();
+    void start();
+    void stop();
+
+
 };
 
 #endif

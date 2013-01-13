@@ -43,6 +43,7 @@ CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
 LD_LIBRARIES = -lpthread
 
 CPPUTEST_USE_GCOV = Y
+CPPUTEST_USE_EXTENSIONS = Y
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 

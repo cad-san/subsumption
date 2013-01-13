@@ -16,6 +16,11 @@ private:
 public:
     Environment();
     ~Environment();
+
+    void init();
+    void start();
+    void stop();
+
     void addSensor(std::string name, Sensor* sensor);
 
     const Sensor* getSensorByName(std::string name) const;

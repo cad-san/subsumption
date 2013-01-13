@@ -8,6 +8,36 @@ Environment::~Environment()
 {
 }
 
+void Environment::init()
+{
+    SensorList::iterator it = sensor_list.begin();
+    while(it != sensor_list.end())
+    {
+        it->second->init();
+        ++it;
+    }
+}
+
+void Environment::start()
+{
+    SensorList::iterator it = sensor_list.begin();
+    while(it != sensor_list.end())
+    {
+        it->second->start();
+        ++it;
+    }
+}
+
+void Environment::stop()
+{
+    SensorList::iterator it = sensor_list.begin();
+    while(it != sensor_list.end())
+    {
+        it->second->stop();
+        ++it;
+    }
+}
+
 void Environment::addSensor(std::string name, Sensor* sensor)
 {
     sensor_list.insert(
