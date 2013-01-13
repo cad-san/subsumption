@@ -7,7 +7,7 @@
 class MockSensor : public Sensor
 {
 public:
-    MockSensor(const unsigned int id);
+    MockSensor(const std::string name);
     ~MockSensor();
 
     void init();

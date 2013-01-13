@@ -1,9 +1,9 @@
 #include "MockSensor.h"
 #include "CppUTestExt/MockSupport.h"
 
-MockSensor::MockSensor(const unsigned int id)
+MockSensor::MockSensor(const std::string name)
 {
-    this->id = id;
+    this->sensor_name = name;
 }
 
 MockSensor::~MockSensor()

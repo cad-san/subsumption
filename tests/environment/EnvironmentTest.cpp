@@ -4,10 +4,8 @@
 #include "Environment.h"
 #include "MockSensor.h"
 
-static const unsigned int dummy_id_01 = 0x01;
-static const unsigned int dummy_id_02 = 0x02;
-
-#define STR(value) #value
+static const char* dummy_name_01 = "dummy_01";
+static const char* dummy_name_02 = "dummy_02";
 
 TEST_GROUP(Environment)
 {
@@ -25,28 +23,28 @@ TEST_GROUP(Environment)
 
 TEST(Environment, AddSensor)
 {
-    MockSensor* sensor = new MockSensor(dummy_id_01);
-    env->addSensor(STR(dummy_id_01), sensor);
+    MockSensor* sensor = new MockSensor(dummy_name_01);
+    env->addSensor(dummy_name_01, sensor);
     LONGS_EQUAL(1, env->getNumSensor());
 }
 
 TEST(Environment, AddMultipleSensor)
 {
-    MockSensor* sensor_1 = new MockSensor(dummy_id_01);
-    MockSensor* sensor_2 = new MockSensor(dummy_id_02);
-    env->addSensor(STR(dummy_id_01), sensor_1);
-    env->addSensor(STR(dummy_id_02), sensor_2);
+    MockSensor* sensor_1 = new MockSensor(dummy_name_01);
+    MockSensor* sensor_2 = new MockSensor(dummy_name_02);
+    env->addSensor(dummy_name_01, sensor_1);
+    env->addSensor(dummy_name_02, sensor_2);
 
     LONGS_EQUAL(2, env->getNumSensor());
 
-    LONGS_EQUAL(dummy_id_01, env->getSensorByName(STR(dummy_id_01))->getId());
-    LONGS_EQUAL(dummy_id_02, env->getSensorByName(STR(dummy_id_02))->getId());
+    POINTERS_EQUAL(sensor_1, env->getSensorByName(dummy_name_01));
+    POINTERS_EQUAL(sensor_2, env->getSensorByName(dummy_name_02));
 }
 
 TEST(Environment, SingleSensorControl)
 {
-    MockSensor* sensor = new MockSensor(dummy_id_01);
-    env->addSensor(STR(dummy_id_01), sensor);
+    MockSensor* sensor = new MockSensor(dummy_name_01);
+    env->addSensor(dummy_name_01, sensor);
 
     mock().expectOneCall("Sensor#init()").onObject(sensor);
     env->init();
