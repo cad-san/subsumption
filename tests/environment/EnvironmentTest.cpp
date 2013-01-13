@@ -7,6 +7,8 @@
 static const char* dummy_name_01 = "dummy_01";
 static const char* dummy_name_02 = "dummy_02";
 
+typedef std::vector<MockSensor *> MockSensorList;
+
 TEST_GROUP(Environment)
 {
     Environment* env;
@@ -19,6 +21,34 @@ TEST_GROUP(Environment)
         mock().clear();
         delete env;
     }
+
+    int createSensors(std::string names[], unsigned int size, MockSensorList* sensors)
+    {
+        if(names == NULL || size < 1)
+            return -1;
+
+        if(sensors == NULL)
+            return -1;
+
+        sensors->clear();
+        for(unsigned int i = 0; i < size; i++)
+            sensors->push_back( new MockSensor(names[i]) );
+        return 0;
+    }
+
+    void addSensorsToEnv(MockSensorList* sensors)
+    {
+        for(unsigned int i = 0; i < sensors->size(); i++)
+            env->addSensor(sensors->at(i)->getName(), sensors->at(i));
+    }
+
+    void checkSensorsInEnv(std::string names[], MockSensorList* sensors)
+    {
+        LONGS_EQUAL(sensors->size(), env->getNumSensor());
+
+        for(unsigned int i = 0; i < sensors->size(); i++)
+            POINTERS_EQUAL(sensors->at(i), env->getSensorByName(names[i]));
+    }
 };
 
 TEST(Environment, AddSensor)
@@ -30,15 +60,14 @@ TEST(Environment, AddSensor)
 
 TEST(Environment, AddMultipleSensor)
 {
-    MockSensor* sensor_1 = new MockSensor(dummy_name_01);
-    MockSensor* sensor_2 = new MockSensor(dummy_name_02);
-    env->addSensor(dummy_name_01, sensor_1);
-    env->addSensor(dummy_name_02, sensor_2);
+    MockSensorList sensors;
+    std::string names[] = {dummy_name_01, dummy_name_02};
 
-    LONGS_EQUAL(2, env->getNumSensor());
+    createSensors(names, 2, &sensors);
 
-    POINTERS_EQUAL(sensor_1, env->getSensorByName(dummy_name_01));
-    POINTERS_EQUAL(sensor_2, env->getSensorByName(dummy_name_02));
+    addSensorsToEnv(&sensors);
+
+    checkSensorsInEnv(names, &sensors);
 }
 
 TEST(Environment, SingleSensorControl)
