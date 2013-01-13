@@ -25,17 +25,17 @@ TEST_GROUP(Environment)
 
 TEST(Environment, AddSensor)
 {
-    MockSensor* senser = new MockSensor(dummy_id_01);
-    env->addSensor(STR(dummy_id_01), senser);
+    MockSensor* sensor = new MockSensor(dummy_id_01);
+    env->addSensor(STR(dummy_id_01), sensor);
     LONGS_EQUAL(1, env->getNumSensor());
 }
 
 TEST(Environment, AddMultipleSensor)
 {
-    MockSensor* senser_1 = new MockSensor(dummy_id_01);
-    MockSensor* senser_2 = new MockSensor(dummy_id_02);
-    env->addSensor(STR(dummy_id_01), senser_1);
-    env->addSensor(STR(dummy_id_02), senser_2);
+    MockSensor* sensor_1 = new MockSensor(dummy_id_01);
+    MockSensor* sensor_2 = new MockSensor(dummy_id_02);
+    env->addSensor(STR(dummy_id_01), sensor_1);
+    env->addSensor(STR(dummy_id_02), sensor_2);
 
     LONGS_EQUAL(2, env->getNumSensor());
 
