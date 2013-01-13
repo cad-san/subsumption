@@ -49,6 +49,26 @@ TEST_GROUP(Environment)
         for(unsigned int i = 0; i < sensors->size(); i++)
             POINTERS_EQUAL(sensors->at(i), env->getSensorByName(names[i]));
     }
+
+    void expectOneCallOfInitIn(MockSensor* sensor)
+    {
+        mock().expectOneCall("Sensor#init()").onObject(sensor);
+    }
+
+    void expectOneCallOfStartIn(MockSensor* sensor)
+    {
+        mock().expectOneCall("Sensor#start()").onObject(sensor);
+    }
+
+    void expectOneCallOfStopIn(MockSensor* sensor)
+    {
+        mock().expectOneCall("Sensor#stop()").onObject(sensor);
+    }
+
+    void checkExpectations()
+    {
+        mock().checkExpectations();
+    }
 };
 
 TEST(Environment, AddSensor)
@@ -75,11 +95,15 @@ TEST(Environment, SingleSensorControl)
     MockSensor* sensor = new MockSensor(dummy_name_01);
     env->addSensor(dummy_name_01, sensor);
 
-    mock().expectOneCall("Sensor#init()").onObject(sensor);
+    expectOneCallOfInitIn(sensor);
     env->init();
-    mock().expectOneCall("Sensor#start()").onObject(sensor);
+
+    expectOneCallOfStartIn(sensor);
     env->start();
-    mock().expectOneCall("Sensor#stop()").onObject(sensor);
+
+    expectOneCallOfStopIn(sensor);
     env->stop();
-    mock().checkExpectations();
+
+    checkExpectations();
 }
+
