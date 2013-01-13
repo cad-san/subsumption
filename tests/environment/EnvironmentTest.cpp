@@ -107,3 +107,27 @@ TEST(Environment, SingleSensorControl)
     checkExpectations();
 }
 
+TEST(Environment, MultipleSensorControl)
+{
+    MockSensorList sensors;
+    std::string names[] = {dummy_name_01, dummy_name_02};
+
+    createSensors(names, 2, &sensors);
+
+    addSensorsToEnv(&sensors);
+
+    expectOneCallOfInitIn(sensors[0]);
+    expectOneCallOfInitIn(sensors[1]);
+    env->init();
+
+    expectOneCallOfStartIn(sensors[0]);
+    expectOneCallOfStartIn(sensors[1]);
+    env->start();
+
+    expectOneCallOfStopIn(sensors[0]);
+    expectOneCallOfStopIn(sensors[1]);
+    env->stop();
+
+    checkExpectations();
+}
+
