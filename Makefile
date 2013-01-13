@@ -10,7 +10,7 @@ codeCppUTest: CppUTest CppUTestExt
 
 cleanCodeCppUTest:
 	make -i -f MakefileCppUTest.mk clean
-	
+
 CppUTest: CppUTest/lib/libCppUTest.a
 
 CppUTestExt: CppUTest/lib/libCppUTestExt.a
@@ -25,5 +25,5 @@ CppUTest/lib/libCppUTestExt.a:
 format:
 	make -i -f MakefileCppUTest.mk uncrustify
 
-gcov:
+gcov: clean
 	make -i -f MakefileCppUTest.mk gcov
