@@ -38,7 +38,7 @@ void Environment::stop()
     }
 }
 
-void Environment::addSensor(std::string name, Sensor* sensor)
+void Environment::addSensor(const std::string& name, Sensor* sensor)
 {
     sensor_list.insert(
         SensorList::value_type(name, SensorPtr(sensor)));
@@ -49,7 +49,7 @@ const int Environment::getNumSensor() const
     return sensor_list.size();
 }
 
-const Sensor* Environment::getSensorByName(std::string name) const
+const Sensor* Environment::getSensorByName(const std::string& name) const
 {
     SensorList::const_iterator it = sensor_list.find(name);
     if(it == sensor_list.end())
