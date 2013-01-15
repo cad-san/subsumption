@@ -21,7 +21,7 @@ public:
     void start();
     void stop();
 
-    void addSensor(const std::string& name, Sensor* sensor);
+    void addSensor(const std::string& name, Sensor* const sensor);
 
     const Sensor* getSensorByName(const std::string& name) const;
     const int getNumSensor() const;
