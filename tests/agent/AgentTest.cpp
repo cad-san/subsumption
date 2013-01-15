@@ -72,6 +72,13 @@ TEST(Agent, AttachMaltipleLayer)
     LONGS_EQUAL(dummy_id_02, agent->getBehaviorAt(1)->getID())
 }
 
+TEST(Agent, AttachNullLayer)
+{
+    agent->addBehavior(NULL);
+    LONGS_EQUAL(0, agent->getNumBehaviors());
+    POINTERS_EQUAL(NULL, agent->getBehaviorAt(0));
+}
+
 TEST(Agent, SingleBehaviorStep)
 {
     SpyBehavior* behavior = new SpyBehavior(dummy_id_01);

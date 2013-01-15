@@ -38,6 +38,9 @@ const int Agent::getNumBehaviors() const
 
 void Agent::addBehavior(Behavior* const new_behavior)
 {
+    if(new_behavior == NULL)
+        return;
+
     int layer = convertFromIDtoLayer(new_behavior->getID());
 
     if(layer != INVALID_LAYER)
