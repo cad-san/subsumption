@@ -20,4 +20,18 @@ TEST_GROUP(Sensor)
 TEST(Sensor, Create)
 {
     CHECK_EQUAL(dummy_name, sensor->getName());
+    CHECK_EQUAL(false, sensor->isReady());
+    CHECK_EQUAL(false, sensor->isActive());
+}
+
+TEST(Sensor, Control)
+{
+    sensor->init();
+    CHECK_EQUAL(true, sensor->isReady());
+
+    sensor->start();
+    CHECK_EQUAL(true, sensor->isActive());
+
+    sensor->stop();
+    CHECK_EQUAL(false, sensor->isActive());
 }
