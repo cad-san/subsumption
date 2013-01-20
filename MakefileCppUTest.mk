@@ -15,16 +15,19 @@ SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src\
 	$(PROJECT_HOME_DIR)/src/agent\
 	$(PROJECT_HOME_DIR)/src/environment\
+	$(PROJECT_HOME_DIR)/src/util\
 
 TEST_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/tests\
 	$(PROJECT_HOME_DIR)/tests/agent\
 	$(PROJECT_HOME_DIR)/tests/environment\
+	$(PROJECT_HOME_DIR)/tests/util\
 
 INC_DIRS = \
 	$(PROJECT_HOME_DIR)/include\
 	$(PROJECT_HOME_DIR)/include/agent\
 	$(PROJECT_HOME_DIR)/include/environment\
+	$(PROJECT_HOME_DIR)/include/util\
 	$(PROJECT_HOME_DIR)/mocks\
 
 INCLUDE_DIRS = \
