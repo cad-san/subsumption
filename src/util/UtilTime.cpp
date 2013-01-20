@@ -15,7 +15,7 @@ UtilTime::add_nsec(const UtilTime& base, const UtilTime& addition) const
     return (base.nsec + addition.nsec) % NSEC_BASE;
 }
 
-UtilTime UtilTime::operator+(const UtilTime& time)
+UtilTime UtilTime::operator+(const UtilTime& time) const
 {
     UtilTime result;
 
