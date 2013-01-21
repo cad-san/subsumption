@@ -1,5 +1,7 @@
 #include "ThreadedSensor.h"
 
+#include <iostream>
+
 static const int MSEC_BASE = 1000 * 1000;
 
 ThreadedSensor::ThreadedSensor(const std::string& name)
@@ -20,14 +22,68 @@ void ThreadedSensor::init()
 
 void ThreadedSensor::start()
 {
-    active_flag = true;
+    main_thread = ThreadPtr(new boost::thread(&ThreadedSensor::main, this));
+    waitStarting();
 }
 
 void ThreadedSensor::stop()
 {
-    active_flag = false;
+    requestStopping();
+    waitStopping();
 }
 
+void ThreadedSensor::step()
+{
+}
+
+void ThreadedSensor::main()
+{
+    UtilTime expect_time = getBaseTime();
+    end_flag = false;
+
+    /* スレッド開始 */
+    active_flag = true;
+    notifyStarting();
+    for(;;)
+    {
+        lock lk(message_guard);
+        if(end_flag)
+            break;
+
+        step();
+
+        expect_time = getNextTime(expect_time);
+        if(stop_request.timed_wait(lk, static_cast<boost::xtime>(expect_time)))
+            break;
+    }
+    active_flag = false;
+    /* スレッド終了 */
+}
+
+void ThreadedSensor::waitStarting()
+{
+    lock lk(message_guard);
+    while(!isActive())
+        start_request.wait(lk);
+}
+
+void ThreadedSensor::notifyStarting()
+{
+    lock kl(message_guard);
+    start_request.notify_one();
+}
+
+void ThreadedSensor::requestStopping()
+{
+    lock kl(message_guard);
+    end_flag = true;
+    stop_request.notify_one();
+}
+
+void ThreadedSensor::waitStopping()
+{
+    main_thread->join();
+}
 void ThreadedSensor::setIntervalMiliSec(const int interval_msec)
 {
     this->interval.sec = 0;

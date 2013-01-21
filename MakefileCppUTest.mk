@@ -43,7 +43,7 @@ MOCKS_SRC_DIRS = \
 CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror
 CPPUTEST_CFLAGS += -Wall -Wstrict-prototypes -pedantic
 CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
-LD_LIBRARIES = -lpthread
+LD_LIBRARIES = -lpthread -lboost_thread-mt
 
 CPPUTEST_USE_GCOV = Y
 CPPUTEST_USE_EXTENSIONS = Y

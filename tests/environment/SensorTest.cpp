@@ -26,6 +26,8 @@ TEST(Sensor, Create)
 
 TEST(Sensor, Control)
 {
+    sensor->setIntervalMiliSec( 500 );
+
     sensor->init();
     CHECK_EQUAL(true, sensor->isReady());
 
