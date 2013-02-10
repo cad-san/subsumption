@@ -4,9 +4,8 @@
 
 static const int MSEC_BASE = 1000 * 1000;
 
-ThreadedSensor::ThreadedSensor(const std::string& name)
+ThreadedSensor::ThreadedSensor(const std::string& name) : Sensor(name)
 {
-    this->sensor_name = name;
     this->ready_flag = false;
     this->active_flag = false;
 }
@@ -97,6 +96,17 @@ void ThreadedSensor::waitStopping()
 {
     main_thread->join();
 }
+
+const bool ThreadedSensor::isReady() const
+{
+    return ready_flag;
+}
+
+const bool ThreadedSensor::isActive() const
+{
+    return active_flag;
+}
+
 void ThreadedSensor::setIntervalMiliSec(const int interval_msec)
 {
     this->interval.sec = 0;

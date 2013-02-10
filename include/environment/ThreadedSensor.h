@@ -15,6 +15,8 @@ private:
 
     UtilTime interval;
     bool end_flag;
+    bool ready_flag;
+    bool active_flag;
 
     ThreadPtr main_thread;
     boost::mutex message_guard;
@@ -40,6 +42,9 @@ public:
     virtual void stop();
 
     virtual void step();
+
+    const bool isReady() const;
+    const bool isActive() const;
 
     void setIntervalMiliSec(const int interval_msec);
 

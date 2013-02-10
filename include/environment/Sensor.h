@@ -7,18 +7,21 @@ class Sensor
 {
 protected:
     std::string sensor_name;
-    bool ready_flag;
-    bool active_flag;
 public:
+    Sensor(const std::string& name)
+    {
+        this->sensor_name = name;
+    }
     virtual ~Sensor() {};
 
     virtual void init() = 0;
     virtual void start() = 0;
     virtual void stop() = 0;
 
+    virtual const bool isReady() const = 0;
+    virtual const bool isActive() const = 0;
+
     const std::string getName() const { return sensor_name; };
-    const bool isReady() const { return ready_flag; };
-    const bool isActive() const { return active_flag; };
 };
 
 #endif
