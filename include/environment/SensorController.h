@@ -6,6 +6,10 @@
 class SensorController : public Runner
 {
 public:
+    virtual void init()
+    {
+    }
+
     virtual void step()
     {
     }

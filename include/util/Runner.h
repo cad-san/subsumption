@@ -6,6 +6,7 @@
 class Runner
 {
 public:
+    virtual void init() = 0;
     virtual void step() = 0;
 };
 typedef boost::shared_ptr<Runner> RunnerPtr;

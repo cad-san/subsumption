@@ -6,21 +6,34 @@
 class MockRunner : public Runner
 {
 private:
-    bool called_flag;
+    bool performed_flag;
+    bool initialized_flag;
 
 public:
     MockRunner()
     {
-        called_flag = false;
-    }
-    void step()
-    {
-        called_flag = true;
+        performed_flag = false;
+        initialized_flag = false;
     }
 
-    bool isCalled()
+    void init()
     {
-        return called_flag;
+        initialized_flag = true;
+    }
+
+    void step()
+    {
+        performed_flag = true;
+    }
+
+    bool performed()
+    {
+        return performed_flag;
+    }
+
+    bool initialized()
+    {
+        return initialized_flag;
     }
 };
 typedef boost::shared_ptr<MockRunner> MockRunnerPtr;

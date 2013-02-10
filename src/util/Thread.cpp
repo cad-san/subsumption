@@ -17,18 +17,31 @@ Thread::~Thread()
 
 void Thread::init()
 {
+    /* Runnerの初期化 */
+    if(runner != NULL)
+        runner->init();
+
     this->ready_flag = true;
     this->active_flag = false;
+    this->end_flag = false;
 }
 
 void Thread::start()
 {
+    /* 未初期化時無効 */
+    if(!isReady())
+        return;
+
     requestStarting();
     waitStarting();
 }
 
 void Thread::stop()
 {
+    /* Activeでないときは無効 */
+    if(!isActive())
+        return;
+
     requestStopping();
     waitStopping();
 }
@@ -36,19 +49,22 @@ void Thread::stop()
 void Thread::main()
 {
     UtilTime expect_time = getBaseTime();
-    end_flag = false;
 
     /* スレッド開始 */
     notifyStarting();
     for(;;)
     {
         lock lk(message_guard);
+
+        /* 終了判定 */
         if(end_flag)
             break;
 
+        /* Stepの実行 */
         if(runner != NULL)
             runner->step();
 
+        /* Intervalに基づき待機 */
         expect_time = getNextTime(expect_time);
         if(end_request.timed_wait(lk, static_cast<boost::xtime>(expect_time)))
             break;
@@ -59,11 +75,19 @@ void Thread::main()
 
 void Thread::requestStarting()
 {
+    /* 未初期化時無効 */
+    if(!isReady())
+        return;
+
     this->main_thread = ThreadPtr(new boost::thread(&Thread::main, this));
 }
 
 void Thread::waitStarting()
 {
+    /* 未初期化時はブロック */
+    if(end_flag)
+        return;
+
     lock lk(message_guard);
     while(!isActive())
         active_request.wait(lk);
@@ -78,6 +102,10 @@ void Thread::notifyStarting()
 
 void Thread::requestStopping()
 {
+    /* Activeでないときは無効 */
+    if(!isActive())
+        return;
+
     lock kl(message_guard);
     end_flag = true;
     end_request.notify_one();
@@ -92,6 +120,10 @@ void Thread::notifyStopping()
 
 void Thread::waitStopping()
 {
+    /* 終了要求未発行ならブロック */
+    if(!end_flag)
+        return;
+
     main_thread->join();
 }
 

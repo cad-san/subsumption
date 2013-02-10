@@ -38,5 +38,6 @@ TEST(Thread, Control)
     thread->stop();
     CHECK_EQUAL(false, thread->isActive());
 
-    CHECK_EQUAL(true, runner->isCalled());
+    CHECK_EQUAL(true, runner->initialized());
+    CHECK_EQUAL(true, runner->performed());
 }
