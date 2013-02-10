@@ -18,11 +18,12 @@ ThreadedSensor::~ThreadedSensor()
 void ThreadedSensor::init()
 {
     ready_flag = true;
+    active_flag = false;
 }
 
 void ThreadedSensor::start()
 {
-    main_thread = ThreadPtr(new boost::thread(&ThreadedSensor::main, this));
+    requestStarting();
     waitStarting();
 }
 
@@ -42,7 +43,6 @@ void ThreadedSensor::main()
     end_flag = false;
 
     /* スレッド開始 */
-    active_flag = true;
     notifyStarting();
     for(;;)
     {
@@ -53,31 +53,44 @@ void ThreadedSensor::main()
         step();
 
         expect_time = getNextTime(expect_time);
-        if(stop_request.timed_wait(lk, static_cast<boost::xtime>(expect_time)))
+        if(end_request.timed_wait(lk, static_cast<boost::xtime>(expect_time)))
             break;
     }
-    active_flag = false;
+    notifyStopping();
     /* スレッド終了 */
+}
+
+void ThreadedSensor::requestStarting()
+{
+    this->main_thread = ThreadPtr(new boost::thread(&ThreadedSensor::main, this));
 }
 
 void ThreadedSensor::waitStarting()
 {
     lock lk(message_guard);
     while(!isActive())
-        start_request.wait(lk);
+        active_request.wait(lk);
 }
 
 void ThreadedSensor::notifyStarting()
 {
     lock kl(message_guard);
-    start_request.notify_one();
+    active_flag = true;
+    active_request.notify_one();
 }
 
 void ThreadedSensor::requestStopping()
 {
     lock kl(message_guard);
     end_flag = true;
-    stop_request.notify_one();
+    end_request.notify_one();
+}
+
+void ThreadedSensor::notifyStopping()
+{
+    lock kl(message_guard);
+    active_flag = false;
+    active_request.notify_one();
 }
 
 void ThreadedSensor::waitStopping()

@@ -18,13 +18,15 @@ private:
 
     ThreadPtr main_thread;
     boost::mutex message_guard;
-    boost::condition_variable_any start_request;
-    boost::condition_variable_any stop_request;
+    boost::condition_variable_any active_request;
+    boost::condition_variable_any end_request;
 
+    void requestStarting();
     void notifyStarting();
     void waitStarting();
 
     void requestStopping();
+    void notifyStopping();
     void waitStopping();
 
     void main();
