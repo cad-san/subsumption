@@ -1,13 +1,14 @@
 #include "Thread.h"
 
-#include <iostream>
-
+static const int INTERVAL_TIME = 500;
 static const int MSEC_BASE = 1000 * 1000;
 
-Thread::Thread()
+Thread::Thread(const RunnerPtr& runner)
 {
     this->ready_flag = false;
     this->active_flag = false;
+    this->setIntervalMiliSec(INTERVAL_TIME);
+    this->runner = runner;
 }
 
 Thread::~Thread()
@@ -32,10 +33,6 @@ void Thread::stop()
     waitStopping();
 }
 
-void Thread::step()
-{
-}
-
 void Thread::main()
 {
     UtilTime expect_time = getBaseTime();
@@ -49,7 +46,8 @@ void Thread::main()
         if(end_flag)
             break;
 
-        step();
+        if(runner != NULL)
+            runner->step();
 
         expect_time = getNextTime(expect_time);
         if(end_request.timed_wait(lk, static_cast<boost::xtime>(expect_time)))
@@ -123,9 +121,4 @@ const UtilTime Thread::getBaseTime() const
 const UtilTime Thread::getNextTime(const UtilTime& base) const
 {
     return base + interval;
-}
-
-const int Thread::diffTimeMiliSec(const UtilTime& base, const UtilTime& next) const
-{
-    return (next.sec - base.sec) * MSEC_BASE + (next.nsec - base.nsec) / 1000;
 }

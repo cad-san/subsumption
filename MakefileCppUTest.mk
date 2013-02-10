@@ -38,6 +38,7 @@ MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks\
 	$(PROJECT_HOME_DIR)/mocks/agent\
 	$(PROJECT_HOME_DIR)/mocks/environment\
+	$(PROJECT_HOME_DIR)/mocks/util\
 
 #---- Setting ----#
 CPPUTEST_WARNINGFLAGS = -Wall -Wswitch-default -Werror

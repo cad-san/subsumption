@@ -1,14 +1,18 @@
 #include "CppUTest/TestHarness.h"
 #include "Thread.h"
+#include "MockRunner.h"
 
 TEST_GROUP(Thread)
 {
+    MockRunnerPtr runner;
     Thread* thread;
 
     void setup()
     {
-        thread = new Thread();
+        runner = MockRunnerPtr(new MockRunner());
+        thread = new Thread(runner);
     }
+
     void teardown()
     {
         delete thread;
@@ -33,12 +37,6 @@ TEST(Thread, Control)
 
     thread->stop();
     CHECK_EQUAL(false, thread->isActive());
-}
 
-TEST(Thread, LoopTime)
-{
-    thread->setIntervalMiliSec( 500 );
-    UtilTime base_time = thread->getBaseTime();
-    UtilTime next_time = thread->getNextTime(base_time);
-    LONGS_EQUAL( 500, thread->diffTimeMiliSec(base_time, next_time));
+    CHECK_EQUAL(true, runner->isCalled());
 }

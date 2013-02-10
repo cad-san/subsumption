@@ -9,7 +9,7 @@ TEST_GROUP(Sensor)
 
     void setup()
     {
-        sensor = new ThreadedSensor(dummy_name);
+        sensor = new ThreadedSensor(dummy_name, new SensorController() );
     }
     void teardown()
     {
