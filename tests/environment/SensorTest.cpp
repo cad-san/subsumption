@@ -37,11 +37,3 @@ TEST(Sensor, Control)
     sensor->stop();
     CHECK_EQUAL(false, sensor->isActive());
 }
-
-TEST(Sensor, LoopTime)
-{
-    sensor->setIntervalMiliSec( 500 );
-    UtilTime base_time = sensor->getBaseTime();
-    UtilTime next_time = sensor->getNextTime(base_time);
-    LONGS_EQUAL( 500, sensor->diffTimeMiliSec(base_time, next_time));
-}
