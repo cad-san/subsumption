@@ -5,6 +5,7 @@ lib/
 #TARGET
 *_tests
 *.exe
+*.exe.*
 
 #formatter files
 *.uncrustify
