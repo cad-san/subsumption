@@ -11,16 +11,16 @@ codeCppUTest: CppUTest CppUTestExt
 cleanCodeCppUTest:
 	make -i -f MakefileCppUTest.mk clean
 
-CppUTest: CppUTest/lib/libCppUTest.a
+CppUTest: cpputest/lib/libCppUTest.a
 
-CppUTestExt: CppUTest/lib/libCppUTestExt.a
+CppUTestExt: cpputest/lib/libCppUTestExt.a
 
-CppUTest/lib/libCppUTest.a:
+cpputest/lib/libCppUTest.a:
 	pwd
-	make -i -C CppUTest
+	make -i -C cpputest
 
-CppUTest/lib/libCppUTestExt.a:
-	make -i -C CppUTest extensions
+cpputest/lib/libCppUTestExt.a:
+	make -i -C cpputest extensions
 
 format:
 	make -i -f MakefileCppUTest.mk uncrustify
