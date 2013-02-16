@@ -1,7 +1,13 @@
 #include "Thread.h"
+#include <boost/version.hpp>
 
 static const int INTERVAL_TIME = 500;
-static const int MSEC_BASE = 1000 * 1000;
+
+#if BOOST_VERSION >= 105000
+#define TIME_UTC boost::TIME_UTC_
+#else
+#define TIME_UTC boost::TIME_UTC
+#endif
 
 Thread::Thread(const RunnerPtr& runner)
 {
@@ -146,7 +152,7 @@ void Thread::setIntervalMiliSec(const int interval_msec)
 const UtilTime Thread::getBaseTime() const
 {
     UtilTime base;
-    boost::xtime_get(&base, boost::TIME_UTC);
+    boost::xtime_get(&base, TIME_UTC);
     return base;
 }
 
