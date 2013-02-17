@@ -10,19 +10,19 @@ ThreadedSensor::~ThreadedSensor()
 {
 }
 
-void ThreadedSensor::init()
+bool ThreadedSensor::init()
 {
-    thread.init();
+    return thread.init();
 }
 
-void ThreadedSensor::start()
+bool ThreadedSensor::start()
 {
-    thread.start();
+    return thread.start();
 }
 
-void ThreadedSensor::stop()
+bool ThreadedSensor::stop()
 {
-    thread.stop();
+    return thread.stop();
 }
 
 const bool ThreadedSensor::isReady() const

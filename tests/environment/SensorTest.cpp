@@ -28,12 +28,12 @@ TEST(Sensor, Control)
 {
     sensor->setIntervalMiliSec( 500 );
 
-    sensor->init();
+    CHECK_EQUAL(true, sensor->init());
     CHECK_EQUAL(true, sensor->isReady());
 
-    sensor->start();
+    CHECK_EQUAL(true, sensor->start());
     CHECK_EQUAL(true, sensor->isActive());
 
-    sensor->stop();
+    CHECK_EQUAL(true, sensor->stop());
     CHECK_EQUAL(false, sensor->isActive());
 }

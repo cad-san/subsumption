@@ -14,9 +14,9 @@ public:
     }
     virtual ~Sensor() {};
 
-    virtual void init() = 0;
-    virtual void start() = 0;
-    virtual void stop() = 0;
+    virtual bool init() = 0;
+    virtual bool start() = 0;
+    virtual bool stop() = 0;
 
     virtual const bool isReady() const = 0;
     virtual const bool isActive() const = 0;

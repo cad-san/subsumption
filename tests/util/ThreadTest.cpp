@@ -29,15 +29,39 @@ TEST(Thread, Control)
 {
     thread->setIntervalMiliSec( 500 );
 
-    thread->init();
+    CHECK_EQUAL(true, thread->init());
     CHECK_EQUAL(true, thread->isReady());
 
-    thread->start();
+    CHECK_EQUAL(true, thread->start());
     CHECK_EQUAL(true, thread->isActive());
 
-    thread->stop();
+    CHECK_EQUAL(true, thread->stop());
     CHECK_EQUAL(false, thread->isActive());
 
     CHECK_EQUAL(true, runner->initialized());
     CHECK_EQUAL(true, runner->performed());
+}
+
+TEST(Thread, StartWithoutInit)
+{
+    CHECK_EQUAL(false, thread->start());
+    CHECK_EQUAL(false, thread->isActive());
+
+    CHECK_EQUAL(false, thread->stop());
+    CHECK_EQUAL(false, thread->isActive());
+
+    CHECK_EQUAL(false, runner->initialized());
+    CHECK_EQUAL(false, runner->performed());
+}
+
+TEST(Thread, StopWithoutStart)
+{
+    CHECK_EQUAL(true, thread->init());
+    CHECK_EQUAL(true, thread->isReady());
+
+    CHECK_EQUAL(false, thread->stop());
+    CHECK_EQUAL(false, thread->isActive());
+
+    CHECK_EQUAL(true, runner->initialized());
+    CHECK_EQUAL(false, runner->performed());
 }

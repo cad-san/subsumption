@@ -17,9 +17,9 @@ public:
     ThreadedSensor(const std::string& name, SensorController* const controller);
     virtual ~ThreadedSensor();
 
-    void init();
-    void start();
-    void stop();
+    bool init();
+    bool start();
+    bool stop();
 
     const bool isReady() const;
     const bool isActive() const;

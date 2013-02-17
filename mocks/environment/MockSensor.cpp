@@ -11,23 +11,26 @@ MockSensor::~MockSensor()
 {
 }
 
-void MockSensor::init()
+bool MockSensor::init()
 {
     ready_flag = true;
     active_flag = false;
     mock().actualCall("Sensor#init()").onObject(this);
+    return true;
 }
 
-void MockSensor::start()
+bool MockSensor::start()
 {
     active_flag = true;
     mock().actualCall("Sensor#start()").onObject(this);
+    return true;
 }
 
-void MockSensor::stop()
+bool MockSensor::stop()
 {
     active_flag = false;
     mock().actualCall("Sensor#stop()").onObject(this);
+    return true;
 }
 
 const bool MockSensor::isReady() const

@@ -42,9 +42,9 @@ public:
     Thread(const RunnerPtr& runner);
     virtual ~Thread();
 
-    void init();
-    void start();
-    void stop();
+    bool init();
+    bool start();
+    bool stop();
 
     const bool isReady() const;
     const bool isActive() const;

@@ -21,7 +21,7 @@ Thread::~Thread()
 {
 }
 
-void Thread::init()
+bool Thread::init()
 {
     /* Runnerの初期化 */
     if(runner != NULL)
@@ -30,26 +30,32 @@ void Thread::init()
     this->ready_flag = true;
     this->active_flag = false;
     this->end_flag = false;
+
+    return true;
 }
 
-void Thread::start()
+bool Thread::start()
 {
     /* 未初期化時無効 */
     if(!isReady())
-        return;
+        return false;
 
     requestStarting();
     waitStarting();
+
+    return true;
 }
 
-void Thread::stop()
+bool Thread::stop()
 {
     /* Activeでないときは無効 */
     if(!isActive())
-        return;
+        return false;
 
     requestStopping();
     waitStopping();
+
+    return true;
 }
 
 void Thread::main()
