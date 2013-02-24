@@ -25,6 +25,8 @@ private:
     RunnerPtr runner;
     UtilTime interval;
 
+    void initFlags();
+
     void requestStarting();
     void notifyStarting();
     void waitStarting();

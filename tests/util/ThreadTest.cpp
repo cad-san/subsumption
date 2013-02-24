@@ -15,7 +15,15 @@ TEST_GROUP(Thread)
 
     void teardown()
     {
+        destroyThead();
+    }
+
+    void destroyThead()
+    {
+        if(thread == NULL)
+            return;
         delete thread;
+        thread = NULL;
     }
 };
 
@@ -64,4 +72,18 @@ TEST(Thread, StopWithoutStart)
 
     CHECK_EQUAL(true, runner->initialized());
     CHECK_EQUAL(false, runner->performed());
+}
+
+TEST(Thread, WithoutStop)
+{
+    CHECK_EQUAL(true, thread->init());
+    CHECK_EQUAL(true, thread->isReady());
+
+    CHECK_EQUAL(true, thread->start());
+    CHECK_EQUAL(true, thread->isActive());
+
+    destroyThead(); // stop()を呼ばずにdelete
+
+    CHECK_EQUAL(true, runner->initialized());
+    CHECK_EQUAL(true, runner->performed());
 }

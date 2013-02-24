@@ -11,14 +11,15 @@ static const int INTERVAL_TIME = 500;
 
 Thread::Thread(const RunnerPtr& runner)
 {
-    this->ready_flag = false;
-    this->active_flag = false;
+    initFlags();
     this->setIntervalMiliSec(INTERVAL_TIME);
     this->runner = runner;
 }
 
 Thread::~Thread()
 {
+    if(isActive())
+        stop();
 }
 
 bool Thread::init()
@@ -27,9 +28,9 @@ bool Thread::init()
     if(runner != NULL)
         runner->init();
 
+    initFlags();
+
     this->ready_flag = true;
-    this->active_flag = false;
-    this->end_flag = false;
 
     return true;
 }
@@ -137,6 +138,13 @@ void Thread::waitStopping()
         return;
 
     main_thread->join();
+}
+
+void Thread::initFlags()
+{
+    this->ready_flag = false;
+    this->active_flag = false;
+    this->end_flag = false;
 }
 
 const bool Thread::isReady() const
