@@ -24,6 +24,10 @@ Thread::~Thread()
 
 bool Thread::init()
 {
+    /* Activeのとき無効 */
+    if(isActive())
+        return false;
+
     /* Runnerの初期化 */
     if(runner != NULL)
         runner->init();

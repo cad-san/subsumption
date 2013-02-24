@@ -87,3 +87,13 @@ TEST(Thread, WithoutStop)
     CHECK_EQUAL(true, runner->initialized());
     CHECK_EQUAL(true, runner->performed());
 }
+
+TEST(Thread, InitAfterStarted)
+{
+    CHECK_EQUAL(true, thread->init());
+    CHECK_EQUAL(true, thread->start());
+
+    CHECK_EQUAL(false, thread->init());
+
+    CHECK_EQUAL(true, thread->stop());
+}
