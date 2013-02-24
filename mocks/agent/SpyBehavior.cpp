@@ -4,12 +4,18 @@ SpyBehavior::SpyBehavior(const unsigned int id)
 {
     this->id = id;
     this->activation = true;
+    this->init_state = false;
     this->sensing_state = false;
     this->perform_state = false;
 }
 
 SpyBehavior::~SpyBehavior()
 {
+}
+
+bool SpyBehavior::initialized()
+{
+    return init_state;
 }
 
 bool SpyBehavior::sensed()
@@ -20,6 +26,11 @@ bool SpyBehavior::sensed()
 bool SpyBehavior::performed()
 {
     return perform_state;
+}
+
+void SpyBehavior::init()
+{
+    init_state = true;
 }
 
 void SpyBehavior::sensing()

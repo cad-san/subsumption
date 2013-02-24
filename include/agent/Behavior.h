@@ -7,6 +7,7 @@ protected:
 public:
     virtual ~Behavior(){}
 
+    virtual void init() = 0;
     virtual void sensing() = 0;
     virtual void perform() = 0;
 

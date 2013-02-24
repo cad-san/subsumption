@@ -12,6 +12,14 @@ Agent::~Agent()
 {
 }
 
+void Agent::init()
+{
+    for(unsigned int i = 0; i < behaviors.size(); i++)
+    {
+        behaviors.at(i)->init();
+    }
+}
+
 void Agent::step()
 {
     int active_behavior = INVALID_LAYER;

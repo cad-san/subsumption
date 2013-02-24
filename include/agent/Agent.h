@@ -1,6 +1,7 @@
 #ifndef D_AGENT_H
 #define D_AGENT_H
 
+#include "Runner.h"
 #include "Behavior.h"
 
 #include <vector>
@@ -8,7 +9,7 @@
 
 typedef boost::shared_ptr<Behavior> BehaviorPtr;
 
-class Agent
+class Agent : public Runner
 {
 public:
     static const int INVALID_LAYER;
@@ -21,6 +22,7 @@ public:
     Agent();
     ~Agent();
 
+    void init();
     void step();
 
     const int getNumBehaviors() const;

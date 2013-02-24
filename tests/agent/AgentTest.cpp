@@ -84,8 +84,10 @@ TEST(Agent, SingleBehaviorStep)
     SpyBehavior* behavior = new SpyBehavior(dummy_id_01);
     agent->addBehavior(behavior);
 
+    agent->init();
     agent->step();
 
+    CHECK(behavior->initialized());
     CHECK(behavior->sensed());
     CHECK(behavior->performed());
 }
@@ -98,7 +100,11 @@ TEST(Agent, MultipleBehaviorStep)
     createBehaviors(id_list, 2, &behaviors);
     setBehaviorsToAgent(&behaviors);
 
+    agent->init();
     agent->step();
+
+    CHECK_EQUAL(true,  behaviors.at(0)->initialized());
+    CHECK_EQUAL(true,  behaviors.at(1)->initialized());
 
     CHECK_EQUAL(true,  behaviors.at(0)->sensed());
     CHECK_EQUAL(true,  behaviors.at(1)->sensed());
@@ -117,6 +123,7 @@ TEST(Agent, NoActivatedBehaviorStep)
     behaviors[0]->setActivation(false);
     behaviors[1]->setActivation(false);
 
+    agent->init();
     agent->step();
 
     CHECK_EQUAL(true,  behaviors.at(0)->sensed());
@@ -154,4 +161,3 @@ TEST(Agent, DisableToAttachSameID)
     agent->addBehavior(second_behavior);
     POINTERS_EQUAL(second_behavior, agent->getBehaviorByID(dummy_id_01));
 }
-
