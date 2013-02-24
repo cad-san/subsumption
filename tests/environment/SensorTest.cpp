@@ -1,5 +1,6 @@
 #include "CppUTest/TestHarness.h"
 #include "ThreadedSensor.h"
+#include "MockSensorController.h"
 
 static const char* dummy_name = "dummy_sensor";
 
@@ -9,7 +10,7 @@ TEST_GROUP(Sensor)
 
     void setup()
     {
-        sensor = new ThreadedSensor(dummy_name, new SensorController() );
+        sensor = new ThreadedSensor(dummy_name, new MockSensorController());
     }
     void teardown()
     {
