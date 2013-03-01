@@ -15,6 +15,17 @@ UtilTime::add_nsec(const UtilTime& base, const UtilTime& addition) const
     return (base.nsec + addition.nsec) % NSEC_BASE;
 }
 
+const UtilTime
+UtilTime::convert_time(const double& time) const
+{
+    UtilTime result;
+
+    result.sec = static_cast<int>(time);
+    result.nsec = (time - result.sec) * NSEC_BASE;
+
+    return result;
+}
+
 UtilTime UtilTime::operator+(const UtilTime& time) const
 {
     UtilTime result;
@@ -25,10 +36,37 @@ UtilTime UtilTime::operator+(const UtilTime& time) const
     return result;
 }
 
-UtilTime UtilTime::operator+=(const UtilTime& time)
+UtilTime& UtilTime::operator=(const UtilTime& time)
+{
+    sec = time.sec;
+    nsec = time.nsec;
+
+    return *this;
+}
+
+UtilTime& UtilTime::operator+=(const UtilTime& time)
 {
     sec = add_sec(*this, time);
     nsec = add_nsec(*this, time);
 
+    return *this;
+}
+
+UtilTime UtilTime::operator+(const double& time) const
+{
+    UtilTime addition = convert_time(time);
+    return *this + addition;
+}
+
+UtilTime& UtilTime::operator=(const double& time)
+{
+    *this = convert_time(time);
+    return *this;
+}
+
+UtilTime& UtilTime::operator+=(const double& time)
+{
+    UtilTime addition = convert_time(time);
+    *this += addition;
     return *this;
 }

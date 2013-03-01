@@ -12,12 +12,19 @@ private:
     const util_sec add_sec(const UtilTime& base, const UtilTime& addition) const;
     const util_nsec add_nsec(const UtilTime& base, const UtilTime& addition) const;
 
+    const UtilTime convert_time(const double& time) const;
+
 public:
     static const int MSEC_BASE;
     static const int NSEC_BASE;
 
     UtilTime operator+(const UtilTime& time) const;
-    UtilTime operator+=(const UtilTime& time);
+    UtilTime& operator=(const UtilTime& time);
+    UtilTime& operator+=(const UtilTime& time);
+
+    UtilTime operator+(const double& time) const;
+    UtilTime& operator=(const double& time);
+    UtilTime& operator+=(const double& time);
 };
 
 #endif
