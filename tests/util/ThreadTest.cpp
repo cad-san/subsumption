@@ -33,6 +33,16 @@ TEST(Thread, Create)
     CHECK_EQUAL(false, thread->isActive());
 }
 
+TEST(Thread, Interval)
+{
+    UtilTime result;
+    thread->setIntervalMiliSec( 500 );
+    result = thread->getIntervalTime();
+
+    LONGS_EQUAL(0, result.sec);
+    LONGS_EQUAL(500 * UtilTime::MSEC_BASE, result.nsec);
+}
+
 TEST(Thread, Control)
 {
     thread->setIntervalMiliSec( 500 );

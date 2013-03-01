@@ -163,8 +163,12 @@ const bool Thread::isActive() const
 
 void Thread::setIntervalMiliSec(const int interval_msec)
 {
-    this->interval.sec = 0;
-    this->interval.nsec = interval_msec * 1000;
+    interval = static_cast<double>(interval_msec) / 1000;
+}
+
+const UtilTime Thread::getIntervalTime() const
+{
+    return interval;
 }
 
 const UtilTime Thread::getBaseTime() const

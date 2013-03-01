@@ -52,6 +52,8 @@ public:
     const bool isActive() const;
 
     void setIntervalMiliSec(const int interval_msec);
+
+    const UtilTime getIntervalTime() const;
 };
 
 #endif
