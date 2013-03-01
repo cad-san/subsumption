@@ -27,3 +27,6 @@ format:
 
 gcov: clean
 	make -i -f MakefileCppUTest.mk gcov
+
+check:
+	make -i -f MakefileCppUTest.mk cppcheck

@@ -10,6 +10,7 @@ COMPONENT_NAME = subsumption
 CPPUTEST_HOME = cpputest
 CPP_PLATFORM = gcc
 PROJECT_HOME_DIR = .
+SCRIPT_DIR = $(PROJECT_HOME_DIR)/scripts
 
 SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src\
@@ -52,7 +53,10 @@ CPPUTEST_USE_EXTENSIONS = Y
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
 uncrustify:
-	${SILENCE} ${PROJECT_HOME_DIR}/scripts/uncrustify.sh $(SRC_DIRS)
-	${SILENCE} ${PROJECT_HOME_DIR}/scripts/uncrustify.sh $(INC_DIRS)
-	${SILENCE} ${PROJECT_HOME_DIR}/scripts/uncrustify.sh $(TEST_SRC_DIRS)
-	${SILENCE} ${PROJECT_HOME_DIR}/scripts/uncrustify.sh $(MOCKS_SRC_DIRS)
+	${SILENCE} ${SCRIPT_DIR}/uncrustify.sh $(SRC_DIRS)
+	${SILENCE} ${SCRIPT_DIR}/uncrustify.sh $(INC_DIRS)
+	${SILENCE} ${SCRIPT_DIR}/uncrustify.sh $(TEST_SRC_DIRS)
+	${SILENCE} ${SCRIPT_DIR}/uncrustify.sh $(MOCKS_SRC_DIRS)
+
+cppcheck:
+	${SILENCE} ${SCRIPT_DIR}/cppcheck.sh $(INC_DIRS) $(PROJECT_HOME_DIR)/src
