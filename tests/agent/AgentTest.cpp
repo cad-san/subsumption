@@ -7,6 +7,8 @@
 
 static const unsigned int dummy_id_01 = 0x01;
 static const unsigned int dummy_id_02 = 0x02;
+static const unsigned int dummy_layer_01 = 0;
+static const unsigned int dummy_layer_02 = 1;
 
 typedef std::vector<SpyBehavior *> SpyBehaviorList;
 
@@ -45,6 +47,39 @@ TEST_GROUP(Agent)
         for(unsigned int i = 0; i < behaviors->size(); i++)
             agent->addBehavior(behaviors->at(i));
     }
+
+    void checkAllBehaviorsInitialied(SpyBehaviorList* behaviors)
+    {
+        for(unsigned int i = 0; i < behaviors->size(); i++)
+            CHECK(behaviors->at(i)->initialized());
+    }
+
+    void checkAllBehaviorsSensed(SpyBehaviorList* behaviors)
+    {
+        for(unsigned int i = 0; i < behaviors->size(); i++)
+            CHECK(behaviors->at(i)->sensed());
+    }
+
+    void checkOneBehaviorPerformedAt(SpyBehaviorList* behaviors,
+                                     unsigned int layer)
+    {
+        for(unsigned int i = 0; i < behaviors->size(); i++)
+        {
+            if(i == layer) {
+                CHECK_EQUAL(true, behaviors->at(i)->performed());
+            }
+            else{
+                CHECK_EQUAL(false, behaviors->at(i)->performed());
+            }
+        }
+    }
+
+    void checkNoBehaviorPerformed(SpyBehaviorList* behaviors)
+    {
+        for(unsigned int i = 0; i < behaviors->size(); i++)
+            CHECK_EQUAL(false, behaviors->at(i)->performed());
+    }
+
 };
 
 TEST(Agent, Create)
@@ -56,7 +91,7 @@ TEST(Agent, AttachSingleLayer)
 {
     agent->addBehavior(new SpyBehavior(dummy_id_01));
     LONGS_EQUAL(1, agent->getNumBehaviors());
-    LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(0)->getID())
+    LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(dummy_layer_01)->getID())
 }
 
 TEST(Agent, AttachMaltipleLayer)
@@ -68,8 +103,8 @@ TEST(Agent, AttachMaltipleLayer)
     setBehaviorsToAgent(&behaviors);
 
     LONGS_EQUAL(2, agent->getNumBehaviors());
-    LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(0)->getID())
-    LONGS_EQUAL(dummy_id_02, agent->getBehaviorAt(1)->getID())
+    LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(dummy_layer_01)->getID());
+    LONGS_EQUAL(dummy_id_02, agent->getBehaviorAt(dummy_layer_02)->getID());
 }
 
 TEST(Agent, AttachNullLayer)
@@ -103,13 +138,28 @@ TEST(Agent, MultipleBehaviorStep)
     agent->init();
     agent->step();
 
-    CHECK_EQUAL(true,  behaviors.at(0)->initialized());
-    CHECK_EQUAL(true,  behaviors.at(1)->initialized());
+    checkAllBehaviorsInitialied(&behaviors);
+    checkAllBehaviorsSensed(&behaviors);
+    checkOneBehaviorPerformedAt(&behaviors, dummy_layer_02);
+}
 
-    CHECK_EQUAL(true,  behaviors.at(0)->sensed());
-    CHECK_EQUAL(true,  behaviors.at(1)->sensed());
-    CHECK_EQUAL(false, behaviors.at(0)->performed());
-    CHECK_EQUAL(true,  behaviors.at(1)->performed());
+TEST(Agent, FirstBehaviorActivatedStep)
+{
+    unsigned int id_list[] = {dummy_id_01, dummy_id_02};
+    SpyBehaviorList behaviors;
+
+    createBehaviors(id_list, 2, &behaviors);
+    setBehaviorsToAgent(&behaviors);
+
+    behaviors[dummy_layer_01]->setActivation(true);
+    behaviors[dummy_layer_02]->setActivation(false);
+
+    agent->init();
+    agent->step();
+
+    checkAllBehaviorsInitialied(&behaviors);
+    checkAllBehaviorsSensed(&behaviors);
+    checkOneBehaviorPerformedAt(&behaviors, dummy_layer_01);
 }
 
 TEST(Agent, NoActivatedBehaviorStep)
@@ -120,16 +170,15 @@ TEST(Agent, NoActivatedBehaviorStep)
     createBehaviors(id_list, 2, &behaviors);
     setBehaviorsToAgent(&behaviors);
 
-    behaviors[0]->setActivation(false);
-    behaviors[1]->setActivation(false);
+    behaviors[dummy_layer_01]->setActivation(false);
+    behaviors[dummy_layer_02]->setActivation(false);
 
     agent->init();
     agent->step();
 
-    CHECK_EQUAL(true,  behaviors.at(0)->sensed());
-    CHECK_EQUAL(true,  behaviors.at(1)->sensed());
-    CHECK_EQUAL(false, behaviors.at(0)->performed());
-    CHECK_EQUAL(false, behaviors.at(1)->performed());
+    checkAllBehaviorsInitialied(&behaviors);
+    checkAllBehaviorsSensed(&behaviors);
+    checkNoBehaviorPerformed(&behaviors);
 }
 
 TEST(Agent, GetWithBehaviorID)
@@ -140,8 +189,8 @@ TEST(Agent, GetWithBehaviorID)
     createBehaviors(id_list, 2, &behaviors);
     setBehaviorsToAgent(&behaviors);
 
-    POINTERS_EQUAL(behaviors.at(0), agent->getBehaviorByID(dummy_id_01));
-    POINTERS_EQUAL(behaviors.at(1), agent->getBehaviorByID(dummy_id_02));
+    POINTERS_EQUAL(behaviors.at(dummy_layer_01), agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(behaviors.at(dummy_layer_02), agent->getBehaviorByID(dummy_id_02));
 }
 
 TEST(Agent, GetNotAttachedBehavior)
