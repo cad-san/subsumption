@@ -17,10 +17,10 @@ CppUTestExt: cpputest/lib/libCppUTestExt.a
 
 cpputest/lib/libCppUTest.a:
 	pwd
-	make -i -C cpputest
+	make -i -C cpputest -f Makefile_using_MakefileWorker
 
 cpputest/lib/libCppUTestExt.a:
-	make -i -C cpputest extensions
+	make -i -C cpputest -f Makefile_using_MakefileWorker extensions
 
 format:
 	make -i -f MakefileCppUTest.mk uncrustify
