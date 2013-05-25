@@ -15,7 +15,7 @@ You'll need to the following to get stared:
 * download latest version
 
 ```
- $ git clone git@github.com:cad-san/subsumption.git
+ $ git clone git://github.com/cad-san/subsumption.git
 ```
 
 * download cpputest
