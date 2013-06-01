@@ -22,11 +22,11 @@ cpputest/lib/libCppUTest.a:
 cpputest/lib/libCppUTestExt.a:
 	make -i -C cpputest -f Makefile_using_MakefileWorker extensions
 
-format:
-	make -i -f MakefileCppUTest.mk uncrustify
-
 gcov: clean
 	make -i -f MakefileCppUTest.mk gcov
 
+format:
+	make -i -f MakefileUTil.mk uncrustify
+
 check:
-	make -i -f MakefileCppUTest.mk cppcheck
+	make -i -f MakefileUtil.mk cppcheck
