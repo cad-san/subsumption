@@ -3,8 +3,6 @@ all: codeCppUTest
 
 clean: cleanCodeCppUTest
 
-cleanCode: cleanCodeCppUTest
-
 codeCppUTest: CppUTest CppUTestExt
 	make -i -f MakefileCppUTest.mk
 
@@ -21,6 +19,9 @@ cpputest/lib/libCppUTest.a:
 
 cpputest/lib/libCppUTestExt.a:
 	make -i -C cpputest -f Makefile_using_MakefileWorker extensions
+
+release: clean
+	make -i -f MakefileRelease.mk
 
 gcov: clean
 	make -i -f MakefileCppUTest.mk gcov
