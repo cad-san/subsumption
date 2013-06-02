@@ -4,10 +4,10 @@ all: codeCppUTest
 clean: cleanCodeCppUTest
 
 codeCppUTest: CppUTest CppUTestExt
-	make -i -f MakefileCppUTest.mk
+	make -i -f scripts/MakefileCppUTest.mk
 
 cleanCodeCppUTest:
-	make -i -f MakefileCppUTest.mk clean
+	make -i -f scripts/MakefileCppUTest.mk clean
 
 CppUTest: cpputest/lib/libCppUTest.a
 
@@ -21,13 +21,13 @@ cpputest/lib/libCppUTestExt.a:
 	make -i -C cpputest -f Makefile_using_MakefileWorker extensions
 
 release: clean
-	make -i -f MakefileRelease.mk
+	make -i -f scripts/MakefileRelease.mk
 
 gcov: clean
-	make -i -f MakefileCppUTest.mk gcov
+	make -i -f scripts/MakefileCppUTest.mk gcov
 
 format:
-	make -i -f MakefileUTil.mk uncrustify
+	make -i -f scripts/MakefileUTil.mk uncrustify
 
 check:
-	make -i -f MakefileUtil.mk cppcheck
+	make -i -f scripts/MakefileUtil.mk cppcheck
