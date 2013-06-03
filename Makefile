@@ -27,7 +27,7 @@ gcov: clean
 	make -i -f scripts/MakefileCppUTest.mk gcov
 
 format:
-	make -i -f scripts/MakefileUTil.mk uncrustify
+	make -i -f scripts/MakefileUtil.mk uncrustify
 
 check:
 	make -i -f scripts/MakefileUtil.mk cppcheck
