@@ -49,3 +49,8 @@ $(OBJS_DIR)/%.o: %.c
 	@echo compiling $(notdir $<)
 	$(SILENCE)mkdir -p $(dir $@)
 	$(SILENCE)$(COMPILE.c) $(DEP_FLAGS)  $(OUTPUT_OPTION) $<
+
+clean:
+	@echo Making clean
+	$(SILENCE)$(RM) $(OBJS) $(TARGET)
+	$(SILENCE)rm -rf gcov $(OBJS_DIR)

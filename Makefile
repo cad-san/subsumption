@@ -1,7 +1,11 @@
 # this is set up to by default to make the top level and test with CppUTest
 all: codeCppUTest
 
-clean: cleanCodeCppUTest
+clean:
+	@if [ -e cpputest/Makefile_using_MakefileWorker ]; \
+	then make cleanCodeCppUTest; \
+	else make cleanRelease; \
+	fi
 
 codeCppUTest: CppUTest CppUTestExt
 	make -i -f scripts/MakefileCppUTest.mk
@@ -22,6 +26,9 @@ cpputest/lib/libCppUTestExt.a:
 
 release: clean
 	make -i -f scripts/MakefileRelease.mk
+
+cleanRelease:
+	make -i -f scripts/MakefileRelease.mk clean
 
 gcov: clean
 	make -i -f scripts/MakefileCppUTest.mk gcov
