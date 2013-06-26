@@ -25,6 +25,12 @@ TEST_GROUP(Thread)
         delete thread;
         thread = NULL;
     }
+
+    void waitFirstStep()
+    {
+        UtilTime expect_time = thread->getNextTime(thread->getBaseTime());
+        runner->waitPerforming(expect_time);
+    }
 };
 
 TEST(Thread, Create)
@@ -52,6 +58,8 @@ TEST(Thread, Control)
 
     CHECK_EQUAL(true, thread->start());
     CHECK_EQUAL(true, thread->isActive());
+
+    waitFirstStep(); // step()が実行されるまで待つ
 
     CHECK_EQUAL(true, thread->stop());
     CHECK_EQUAL(false, thread->isActive());
@@ -91,6 +99,8 @@ TEST(Thread, WithoutStop)
 
     CHECK_EQUAL(true, thread->start());
     CHECK_EQUAL(true, thread->isActive());
+
+    waitFirstStep(); // step()が実行されるまで待つ
 
     destroyThead(); // stop()を呼ばずにdelete
 

@@ -37,9 +37,6 @@ private:
 
     void main();
 
-    const UtilTime getBaseTime() const;
-    const UtilTime getNextTime(const UtilTime& base) const;
-
 public:
     Thread(const RunnerPtr& runner);
     virtual ~Thread();
@@ -54,6 +51,9 @@ public:
     void setIntervalMiliSec(const int interval_msec);
 
     const UtilTime getIntervalTime() const;
+
+    const UtilTime getBaseTime() const;
+    const UtilTime getNextTime(const UtilTime& base) const;
 };
 
 #endif
