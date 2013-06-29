@@ -10,7 +10,8 @@ static const unsigned int dummy_id_02 = 0x02;
 static const unsigned int dummy_layer_01 = 0;
 static const unsigned int dummy_layer_02 = 1;
 
-typedef std::vector<SpyBehavior *> SpyBehaviorList;
+typedef boost::shared_ptr<SpyBehavior> SpyBehaviorPtr;
+typedef std::vector<SpyBehaviorPtr> SpyBehaviorList;
 
 TEST_GROUP(Agent)
 {
@@ -37,9 +38,14 @@ TEST_GROUP(Agent)
         behavior_list->clear();
         for(unsigned int i = 0; i < size; i++)
         {
-            behavior_list->push_back( new SpyBehavior(id_list[i]) );
+            behavior_list->push_back( createBehaviorPtr(id_list[i]) );
         }
         return 0;
+    }
+
+    SpyBehaviorPtr createBehaviorPtr(unsigned int id_list)
+    {
+        return SpyBehaviorPtr(new SpyBehavior(id_list));
     }
 
     void setBehaviorsToAgent(SpyBehaviorList* behaviors)
@@ -89,7 +95,7 @@ TEST(Agent, Create)
 
 TEST(Agent, AttachSingleLayer)
 {
-    agent->addBehavior(new SpyBehavior(dummy_id_01));
+    agent->addBehavior(createBehaviorPtr(dummy_id_01));
     LONGS_EQUAL(1, agent->getNumBehaviors());
     LONGS_EQUAL(dummy_id_01, agent->getBehaviorAt(dummy_layer_01)->getID())
 }
@@ -109,14 +115,15 @@ TEST(Agent, AttachMaltipleLayer)
 
 TEST(Agent, AttachNullLayer)
 {
-    agent->addBehavior(NULL);
+    SpyBehaviorPtr nullBehavior( static_cast<SpyBehavior *>(NULL) );
+    agent->addBehavior(nullBehavior);
     LONGS_EQUAL(0, agent->getNumBehaviors());
     POINTERS_EQUAL(NULL, agent->getBehaviorAt(0));
 }
 
 TEST(Agent, SingleBehaviorStep)
 {
-    SpyBehavior* behavior = new SpyBehavior(dummy_id_01);
+    SpyBehaviorPtr behavior = createBehaviorPtr(dummy_id_01);
     agent->addBehavior(behavior);
 
     agent->init();
@@ -189,8 +196,10 @@ TEST(Agent, GetWithBehaviorID)
     createBehaviors(id_list, 2, &behaviors);
     setBehaviorsToAgent(&behaviors);
 
-    POINTERS_EQUAL(behaviors.at(dummy_layer_01), agent->getBehaviorByID(dummy_id_01));
-    POINTERS_EQUAL(behaviors.at(dummy_layer_02), agent->getBehaviorByID(dummy_id_02));
+    POINTERS_EQUAL(behaviors.at(dummy_layer_01).get(),
+                   agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(behaviors.at(dummy_layer_02).get(),
+                   agent->getBehaviorByID(dummy_id_02));
 }
 
 TEST(Agent, GetNotAttachedBehavior)
@@ -201,12 +210,12 @@ TEST(Agent, GetNotAttachedBehavior)
 
 TEST(Agent, DisableToAttachSameID)
 {
-    SpyBehavior* first_behavior = new SpyBehavior(dummy_id_01);
-    SpyBehavior* second_behavior = new SpyBehavior(dummy_id_01);
+    SpyBehaviorPtr first_behavior = createBehaviorPtr(dummy_id_01);
+    SpyBehaviorPtr second_behavior = createBehaviorPtr(dummy_id_01);
 
     agent->addBehavior(first_behavior);
-    POINTERS_EQUAL(first_behavior, agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(first_behavior.get(), agent->getBehaviorByID(dummy_id_01));
 
     agent->addBehavior(second_behavior);
-    POINTERS_EQUAL(second_behavior, agent->getBehaviorByID(dummy_id_01));
+    POINTERS_EQUAL(second_behavior.get(), agent->getBehaviorByID(dummy_id_01));
 }

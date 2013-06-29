@@ -7,8 +7,6 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
-typedef boost::shared_ptr<Behavior> BehaviorPtr;
-
 class Agent : public Runner
 {
 public:
@@ -26,7 +24,7 @@ public:
     void step();
 
     const int getNumBehaviors() const;
-    void addBehavior(Behavior* const new_behavior);
+    void addBehavior(const BehaviorPtr& new_behavior);
     void removeBehaviorAt(const unsigned int layer);
     const Behavior* getBehaviorAt(const unsigned int layer) const;
     const Behavior* getBehaviorByID(const unsigned int id) const;
