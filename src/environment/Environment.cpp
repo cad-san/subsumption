@@ -38,13 +38,12 @@ void Environment::stop()
     }
 }
 
-void Environment::addSensor(const std::string& name, Sensor* const sensor)
+void Environment::addSensor(const std::string& name, const SensorPtr& sensor)
 {
-    if(sensor == NULL)
+    if(sensor.get() == NULL)
         return;
 
-    sensor_list.insert(
-        SensorList::value_type(name, SensorPtr(sensor)));
+    sensor_list.insert(SensorList::value_type(name, sensor));
 }
 
 const int Environment::getNumSensor() const

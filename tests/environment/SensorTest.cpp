@@ -10,7 +10,8 @@ TEST_GROUP(Sensor)
 
     void setup()
     {
-        sensor = new ThreadedSensor(dummy_name, new MockSensorController());
+        ControllerPtr controller(new MockSensorController());
+        sensor = new ThreadedSensor(dummy_name, controller);
     }
     void teardown()
     {

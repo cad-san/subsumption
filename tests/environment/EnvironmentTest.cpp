@@ -7,7 +7,8 @@
 static const char* dummy_name_01 = "dummy_01";
 static const char* dummy_name_02 = "dummy_02";
 
-typedef std::vector<MockSensor *> MockSensorList;
+typedef boost::shared_ptr<MockSensor> MockSensorPtr;
+typedef std::vector<MockSensorPtr> MockSensorList;
 
 TEST_GROUP(Environment)
 {
@@ -32,8 +33,13 @@ TEST_GROUP(Environment)
 
         sensors->clear();
         for(unsigned int i = 0; i < size; i++)
-            sensors->push_back( new MockSensor(names[i]) );
+            sensors->push_back( createSensorPtr(names[i]) );
         return 0;
+    }
+
+    MockSensorPtr createSensorPtr(const std::string& name)
+    {
+        return MockSensorPtr(new MockSensor(name));
     }
 
     void addSensorsToEnv(MockSensorList* sensors)
@@ -47,22 +53,22 @@ TEST_GROUP(Environment)
         LONGS_EQUAL(sensors->size(), env->getNumSensor());
 
         for(unsigned int i = 0; i < sensors->size(); i++)
-            POINTERS_EQUAL(sensors->at(i), env->getSensorByName(names[i]));
+            POINTERS_EQUAL(sensors->at(i).get(), env->getSensorByName(names[i]));
     }
 
-    void expectOneCallOfInitIn(MockSensor* sensor)
+    void expectOneCallOfInitIn(const MockSensorPtr& sensor)
     {
-        mock().expectOneCall("Sensor#init()").onObject(sensor);
+        mock().expectOneCall("Sensor#init()").onObject(sensor.get());
     }
 
-    void expectOneCallOfStartIn(MockSensor* sensor)
+    void expectOneCallOfStartIn(const MockSensorPtr& sensor)
     {
-        mock().expectOneCall("Sensor#start()").onObject(sensor);
+        mock().expectOneCall("Sensor#start()").onObject(sensor.get());
     }
 
-    void expectOneCallOfStopIn(MockSensor* sensor)
+    void expectOneCallOfStopIn(const MockSensorPtr& sensor)
     {
-        mock().expectOneCall("Sensor#stop()").onObject(sensor);
+        mock().expectOneCall("Sensor#stop()").onObject(sensor.get());
     }
 
     void checkExpectations()
@@ -73,7 +79,7 @@ TEST_GROUP(Environment)
 
 TEST(Environment, AddSensor)
 {
-    MockSensor* sensor = new MockSensor(dummy_name_01);
+    MockSensorPtr sensor = createSensorPtr(dummy_name_01);
     env->addSensor(dummy_name_01, sensor);
     LONGS_EQUAL(1, env->getNumSensor());
 }
@@ -98,14 +104,15 @@ TEST(Environment, NoSensorInEnvironment)
 
 TEST(Environment, AddNullSensor)
 {
-    env->addSensor(dummy_name_01, NULL);
+    MockSensorPtr null_sensor( static_cast<MockSensor*>(NULL) );
+    env->addSensor(dummy_name_01, null_sensor);
     LONGS_EQUAL(0, env->getNumSensor());
     POINTERS_EQUAL(NULL, env->getSensorByName(dummy_name_01));
 }
 
 TEST(Environment, SingleSensorControl)
 {
-    MockSensor* sensor = new MockSensor(dummy_name_01);
+    MockSensorPtr sensor = createSensorPtr(dummy_name_01);
     env->addSensor(dummy_name_01, sensor);
 
     expectOneCallOfInitIn(sensor);
