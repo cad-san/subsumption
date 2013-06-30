@@ -67,22 +67,22 @@ void Agent::removeBehaviorAt(unsigned int layer)
                     behaviors.end());
 }
 
-const Behavior* Agent::getBehaviorAt(const unsigned int layer) const
+const BehaviorPtr Agent::getBehaviorAt(const unsigned int layer) const
 {
     if(!isValidLayer(layer))
-        return NULL;
+        return BehaviorPtr();
 
-    return behaviors.at(layer).get();
+    return behaviors.at(layer);
 }
 
-const Behavior* Agent::getBehaviorByID(const unsigned int id) const
+const BehaviorPtr Agent::getBehaviorByID(const unsigned int id) const
 {
     int layer = convertFromIDtoLayer(id);
 
     if(layer == INVALID_LAYER)
-        return NULL;
+        return BehaviorPtr();
 
-    return behaviors.at(static_cast<unsigned int>(layer)).get();
+    return behaviors.at(static_cast<unsigned int>(layer));
 }
 
 const int Agent::convertFromIDtoLayer(unsigned int id) const

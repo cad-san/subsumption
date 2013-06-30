@@ -51,11 +51,11 @@ const int Environment::getNumSensor() const
     return sensor_list.size();
 }
 
-const Sensor* Environment::getSensorByName(const std::string& name) const
+const SensorPtr Environment::getSensorByName(const std::string& name) const
 {
     SensorList::const_iterator it = sensor_list.find(name);
     if(it == sensor_list.end())
-        return NULL;
+        return SensorPtr();
 
-    return it->second.get();
+    return it->second;
 }

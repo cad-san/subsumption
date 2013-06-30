@@ -28,6 +28,7 @@ INC_DIRS = \
 
 INCLUDE_DIRS = \
 	$(CPPUTEST_HOME)/include\
+	$(PROJECT_HOME_DIR)/tests\
 	${INC_DIRS}
 
 MOCKS_SRC_DIRS = \

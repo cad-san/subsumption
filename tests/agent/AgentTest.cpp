@@ -1,4 +1,5 @@
 #include "CppUTest/TestHarness.h"
+#include "UtilAssert.h"
 
 #include "Agent.h"
 #include "SpyBehavior.h"
@@ -85,7 +86,6 @@ TEST_GROUP(Agent)
         for(unsigned int i = 0; i < behaviors->size(); i++)
             CHECK_EQUAL(false, behaviors->at(i)->performed());
     }
-
 };
 
 TEST(Agent, Create)
@@ -118,7 +118,7 @@ TEST(Agent, AttachNullLayer)
     SpyBehaviorPtr nullBehavior( static_cast<SpyBehavior *>(NULL) );
     agent->addBehavior(nullBehavior);
     LONGS_EQUAL(0, agent->getNumBehaviors());
-    POINTERS_EQUAL(NULL, agent->getBehaviorAt(0));
+    CHECK_SHARED_PTR_NULL(agent->getBehaviorAt(0));
 }
 
 TEST(Agent, SingleBehaviorStep)
@@ -196,16 +196,14 @@ TEST(Agent, GetWithBehaviorID)
     createBehaviors(id_list, 2, &behaviors);
     setBehaviorsToAgent(&behaviors);
 
-    POINTERS_EQUAL(behaviors.at(dummy_layer_01).get(),
-                   agent->getBehaviorByID(dummy_id_01));
-    POINTERS_EQUAL(behaviors.at(dummy_layer_02).get(),
-                   agent->getBehaviorByID(dummy_id_02));
+    SHARED_PTRS_EQUAL(behaviors.at(dummy_layer_01), agent->getBehaviorByID(dummy_id_01));
+    SHARED_PTRS_EQUAL(behaviors.at(dummy_layer_02), agent->getBehaviorByID(dummy_id_02));
 }
 
 TEST(Agent, GetNotAttachedBehavior)
 {
-    POINTERS_EQUAL(NULL, agent->getBehaviorAt(0));
-    POINTERS_EQUAL(NULL, agent->getBehaviorByID(dummy_id_01));
+    CHECK_SHARED_PTR_NULL(agent->getBehaviorAt(0));
+    CHECK_SHARED_PTR_NULL(agent->getBehaviorByID(dummy_id_01));
 }
 
 TEST(Agent, DisableToAttachSameID)
@@ -214,8 +212,8 @@ TEST(Agent, DisableToAttachSameID)
     SpyBehaviorPtr second_behavior = createBehaviorPtr(dummy_id_01);
 
     agent->addBehavior(first_behavior);
-    POINTERS_EQUAL(first_behavior.get(), agent->getBehaviorByID(dummy_id_01));
+    SHARED_PTRS_EQUAL(first_behavior, agent->getBehaviorByID(dummy_id_01));
 
     agent->addBehavior(second_behavior);
-    POINTERS_EQUAL(second_behavior.get(), agent->getBehaviorByID(dummy_id_01));
+    SHARED_PTRS_EQUAL(second_behavior, agent->getBehaviorByID(dummy_id_01));
 }
