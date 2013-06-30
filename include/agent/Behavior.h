@@ -1,6 +1,8 @@
 #ifndef D_BEHAVIOR_H
 #define D_BEHAVIOR_H
 
+#include <boost/shared_ptr.hpp>
+
 class Behavior {
 protected:
     unsigned int id;
@@ -15,6 +17,8 @@ public:
 
     const unsigned int getID() const { return id; }
 };
+
+typedef boost::shared_ptr<Behavior> BehaviorPtr;
 
 #endif
 

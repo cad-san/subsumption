@@ -8,13 +8,11 @@
 class ThreadedSensor : public Sensor
 {
 private:
-    typedef boost::shared_ptr<SensorController> ControllerPtr;
-
     ControllerPtr controllPtr;
     Thread thread;
 
 public:
-    ThreadedSensor(const std::string& name, SensorController* const controller);
+    ThreadedSensor(const std::string& name, const ControllerPtr& controller);
     virtual ~ThreadedSensor();
 
     bool init();

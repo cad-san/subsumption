@@ -44,9 +44,9 @@ const int Agent::getNumBehaviors() const
     return behaviors.size();
 }
 
-void Agent::addBehavior(Behavior* const new_behavior)
+void Agent::addBehavior(const BehaviorPtr& new_behavior)
 {
-    if(new_behavior == NULL)
+    if(new_behavior.get() == NULL)
         return;
 
     int layer = convertFromIDtoLayer(new_behavior->getID());
@@ -54,7 +54,7 @@ void Agent::addBehavior(Behavior* const new_behavior)
     if(layer != INVALID_LAYER)
         removeBehaviorAt(layer);
 
-    behaviors.push_back(BehaviorPtr(new_behavior));
+    behaviors.push_back(new_behavior);
 }
 
 void Agent::removeBehaviorAt(unsigned int layer)

@@ -10,4 +10,6 @@ public:
     virtual void step() = 0;
 };
 
+typedef boost::shared_ptr<SensorController> ControllerPtr;
+
 #endif
