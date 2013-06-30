@@ -1,5 +1,6 @@
 #include "CppUTest/TestHarness.h"
 #include "CppUTestExt/MockSupport.h"
+#include "UtilAssert.h"
 
 #include "Environment.h"
 #include "MockSensor.h"
@@ -53,7 +54,7 @@ TEST_GROUP(Environment)
         LONGS_EQUAL(sensors->size(), env->getNumSensor());
 
         for(unsigned int i = 0; i < sensors->size(); i++)
-            POINTERS_EQUAL(sensors->at(i).get(), env->getSensorByName(names[i]));
+            SHARED_PTRS_EQUAL(sensors->at(i), env->getSensorByName(names[i]));
     }
 
     void expectOneCallOfInitIn(const MockSensorPtr& sensor)
@@ -99,7 +100,7 @@ TEST(Environment, AddMultipleSensor)
 TEST(Environment, NoSensorInEnvironment)
 {
     LONGS_EQUAL(0, env->getNumSensor());
-    POINTERS_EQUAL(NULL, env->getSensorByName("not_exist_sensor"));
+    CHECK_SHARED_PTR_NULL(env->getSensorByName("not_exist_sensor"));
 }
 
 TEST(Environment, AddNullSensor)
@@ -107,7 +108,7 @@ TEST(Environment, AddNullSensor)
     MockSensorPtr null_sensor( static_cast<MockSensor*>(NULL) );
     env->addSensor(dummy_name_01, null_sensor);
     LONGS_EQUAL(0, env->getNumSensor());
-    POINTERS_EQUAL(NULL, env->getSensorByName(dummy_name_01));
+    CHECK_SHARED_PTR_NULL(env->getSensorByName(dummy_name_01));
 }
 
 TEST(Environment, SingleSensorControl)
