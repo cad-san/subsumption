@@ -3,6 +3,16 @@
 const int UtilTime::MSEC_BASE = 1000 * 1000;
 const int UtilTime::NSEC_BASE = 1000 * 1000 * 1000;
 
+UtilTime::UtilTime()
+{
+    this->sec = 0;
+    this->nsec = 0;
+}
+
+UtilTime::~UtilTime()
+{
+}
+
 const UtilTime::util_sec
 UtilTime::add_sec(const UtilTime& base, const UtilTime& addition) const
 {

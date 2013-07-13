@@ -15,7 +15,7 @@ private:
     SensorList sensor_list;
 public:
     Environment();
-    ~Environment();
+    virtual ~Environment();
 
     void init();
     void start();

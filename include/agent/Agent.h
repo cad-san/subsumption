@@ -18,7 +18,7 @@ private:
     const bool isValidLayer(const unsigned int layer) const;
 public:
     Agent();
-    ~Agent();
+    virtual ~Agent();
 
     void init();
     void step();

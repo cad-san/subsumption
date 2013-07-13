@@ -6,6 +6,7 @@
 class Runner
 {
 public:
+    virtual ~Runner(){}
     virtual void init() = 0;
     virtual void step() = 0;
 };
