@@ -1,5 +1,8 @@
 #Subsumption
 
+ [![Build Status](https://travis-ci.org/cad-san/subsumption.png?branch=master)](https://travis-ci.org/cad-san/subsumption)
+ [![Coverage Status](https://coveralls.io/repos/cad-san/subsumption/badge.png)](https://coveralls.io/r/cad-san/subsumption)
+
 ##Overview
 This is simple library to implements "subsumption architecture" devised by Rodney Allen Brooks.
 
