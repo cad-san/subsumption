@@ -8,16 +8,16 @@ clean:
 	fi
 
 test: CppUTest CppUTestExt
-	make -i -f scripts/MakefileCppUTest.mk
+	make -f scripts/MakefileCppUTest.mk
 
 gcov: CppUTest CppUTestExt clean
-	make -i -f scripts/MakefileCppUTest.mk gcov
+	make -f scripts/MakefileCppUTest.mk gcov
 
 cleanTest:
 	make -i -f scripts/MakefileCppUTest.mk clean
 
 release: clean
-	make -i -f scripts/MakefileRelease.mk
+	make -f scripts/MakefileRelease.mk
 
 cleanRelease:
 	make -i -f scripts/MakefileRelease.mk clean
