@@ -1,8 +1,7 @@
 #include "SpyBehavior.h"
 
-SpyBehavior::SpyBehavior(const unsigned int id)
+SpyBehavior::SpyBehavior(const unsigned int id) : Behavior(id)
 {
-    this->id = id;
     this->activation = true;
     this->init_state = false;
     this->sensing_state = false;

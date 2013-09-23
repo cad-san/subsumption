@@ -7,6 +7,11 @@ class Behavior {
 protected:
     unsigned int id;
 public:
+    Behavior(const unsigned int behavior_id)
+    {
+        this->id = behavior_id;
+    }
+
     virtual ~Behavior(){}
 
     virtual void init() = 0;
