@@ -18,9 +18,6 @@ src_to = $(addprefix $(OBJS_DIR)/,$(call __src_to,$1,$2))
 src_to_o = $(call src_to,.o,$1)
 
 #---- Setting ----#
-CC  := gcc
-CXX := g++
-
 TARGET = \
 	$(LIB_DIR)/lib$(COMPONENT_NAME).a
 
