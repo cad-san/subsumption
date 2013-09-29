@@ -19,8 +19,8 @@ public:
     bool start();
     bool stop();
 
-    const bool isReady() const;
-    const bool isActive() const;
+    bool isReady() const;
+    bool isActive() const;
 
     void setIntervalMiliSec(const int interval_msec);
 };

@@ -33,12 +33,12 @@ bool MockSensor::stop()
     return true;
 }
 
-const bool MockSensor::isReady() const
+bool MockSensor::isReady() const
 {
     return ready_flag;
 }
 
-const bool MockSensor::isActive() const
+bool MockSensor::isActive() const
 {
     return active_flag;
 }

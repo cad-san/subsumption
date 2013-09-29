@@ -25,12 +25,12 @@ bool ThreadedSensor::stop()
     return thread.stop();
 }
 
-const bool ThreadedSensor::isReady() const
+bool ThreadedSensor::isReady() const
 {
     return thread.isReady();
 }
 
-const bool ThreadedSensor::isActive() const
+bool ThreadedSensor::isActive() const
 {
     return thread.isActive();
 }
