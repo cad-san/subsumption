@@ -7,7 +7,7 @@ SILENCE = @
 include target.mk
 
 #---- Setting ----#
-CPPUTEST_WARNINGFLAGS = -Wall -W -pedantic\
+CPPUTEST_WARNINGFLAGS = -Wall -W -Werror -pedantic-errors\
                         -Wcast-qual -Wcast-align -Wwrite-strings\
                         -Wconversion -Wfloat-equal -Wpointer-arith
 CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
