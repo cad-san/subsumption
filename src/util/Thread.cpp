@@ -151,12 +151,12 @@ void Thread::initFlags()
     this->end_flag = false;
 }
 
-const bool Thread::isReady() const
+bool Thread::isReady() const
 {
     return ready_flag;
 }
 
-const bool Thread::isActive() const
+bool Thread::isActive() const
 {
     return active_flag;
 }

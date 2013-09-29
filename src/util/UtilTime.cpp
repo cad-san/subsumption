@@ -13,13 +13,13 @@ UtilTime::~UtilTime()
 {
 }
 
-const UtilTime::util_sec
+UtilTime::util_sec
 UtilTime::add_sec(const UtilTime& base, const UtilTime& addition) const
 {
     return (base.sec + addition.sec) + (base.nsec + addition.nsec) / NSEC_BASE;
 }
 
-const UtilTime::util_nsec
+UtilTime::util_nsec
 UtilTime::add_nsec(const UtilTime& base, const UtilTime& addition) const
 {
     return (base.nsec + addition.nsec) % NSEC_BASE;
