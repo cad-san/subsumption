@@ -38,7 +38,7 @@ private:
     void main();
 
 public:
-    Thread(const RunnerPtr& runner);
+    Thread(const RunnerPtr& runner_ptr);
     virtual ~Thread();
 
     bool init();

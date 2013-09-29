@@ -9,11 +9,11 @@ static const int INTERVAL_TIME = 500;
 #define TIME_UTC boost::TIME_UTC
 #endif
 
-Thread::Thread(const RunnerPtr& runner)
+Thread::Thread(const RunnerPtr& runner_ptr)
 {
     initFlags();
     this->setIntervalMiliSec(INTERVAL_TIME);
-    this->runner = runner;
+    this->runner = runner_ptr;
 }
 
 Thread::~Thread()

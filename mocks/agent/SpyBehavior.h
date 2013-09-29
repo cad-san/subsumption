@@ -11,7 +11,7 @@ private:
     bool sensing_state;
     bool perform_state;
 public:
-    explicit SpyBehavior(const unsigned int id);
+    explicit SpyBehavior(const unsigned int behavior_id);
     ~SpyBehavior();
 
     void init();
