@@ -30,7 +30,9 @@ INCLUDES += $(foreach dir, $(INCLUDES_DIRS_EXPANDED), -I$(dir))
 SRCS += $(call get_src_from_dir_list, $(SRC_DIRS)) $(SRC_FILES)
 OBJS = $(call src_to_o,$(SRCS))
 
-CPPWARNINGFLAGS +=	-Wall -W -pedantic
+CPPWARNINGFLAGS +=	-Wall -W -pedantic\
+					-Wcast-qual -Wcast-align -Wwrite-strings\
+					-Wconversion -Wfloat-equal -Wpointer-arith
 
 CPPFLAGS += $(INCLUDES) $(CPPWARNINGFLAGS)
 LDFLAGS  = -lboost_thread-mt -lboost_system-mt
