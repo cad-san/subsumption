@@ -38,15 +38,15 @@ private:
     void main();
 
 public:
-    Thread(const RunnerPtr& runner);
+    Thread(const RunnerPtr& runner_ptr);
     virtual ~Thread();
 
     bool init();
     bool start();
     bool stop();
 
-    const bool isReady() const;
-    const bool isActive() const;
+    bool isReady() const;
+    bool isActive() const;
 
     void setIntervalMiliSec(const int interval_msec);
 

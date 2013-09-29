@@ -12,16 +12,16 @@ public:
     {
         this->sensor_name = name;
     }
-    virtual ~Sensor() {};
+    virtual ~Sensor() {}
 
     virtual bool init() = 0;
     virtual bool start() = 0;
     virtual bool stop() = 0;
 
-    virtual const bool isReady() const = 0;
-    virtual const bool isActive() const = 0;
+    virtual bool isReady() const = 0;
+    virtual bool isActive() const = 0;
 
-    const std::string getName() const { return sensor_name; };
+    const std::string getName() const { return sensor_name; }
 };
 
 #endif
