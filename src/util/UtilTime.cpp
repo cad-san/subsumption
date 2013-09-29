@@ -1,4 +1,5 @@
 #include "UtilTime.h"
+#include <math.h>
 
 const int UtilTime::MSEC_BASE = 1000 * 1000;
 const int UtilTime::NSEC_BASE = 1000 * 1000 * 1000;
@@ -28,10 +29,13 @@ UtilTime::add_nsec(const UtilTime& base, const UtilTime& addition) const
 const UtilTime
 UtilTime::convert_time(const double& time) const
 {
-    UtilTime result;
+    double integral;
+    double decimal;
+    decimal = modf(time, &integral);
 
-    result.sec = static_cast<int>(time);
-    result.nsec = (time - result.sec) * NSEC_BASE;
+    UtilTime result;
+    result.sec = static_cast<util_sec>(integral);
+    result.nsec = static_cast<util_nsec>(decimal * NSEC_BASE);
 
     return result;
 }
