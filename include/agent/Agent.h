@@ -14,8 +14,8 @@ public:
 private:
     std::vector< BehaviorPtr > behaviors;
 
-    const int convertFromIDtoLayer(const unsigned int id) const;
-    const bool isValidLayer(const unsigned int layer) const;
+    int convertFromIDtoLayer(const unsigned int id) const;
+    bool isValidLayer(const unsigned int layer) const;
 public:
     Agent();
     virtual ~Agent();
@@ -23,7 +23,7 @@ public:
     void init();
     void step();
 
-    const int getNumBehaviors() const;
+    int getNumBehaviors() const;
     void addBehavior(const BehaviorPtr& new_behavior);
     void removeBehaviorAt(const unsigned int layer);
     const BehaviorPtr getBehaviorAt(const unsigned int layer) const;

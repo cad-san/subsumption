@@ -46,9 +46,9 @@ void Environment::addSensor(const std::string& name, const SensorPtr& sensor)
     sensor_list.insert(SensorList::value_type(name, sensor));
 }
 
-const int Environment::getNumSensor() const
+int Environment::getNumSensor() const
 {
-    return sensor_list.size();
+    return static_cast<int>(sensor_list.size());
 }
 
 const SensorPtr Environment::getSensorByName(const std::string& name) const

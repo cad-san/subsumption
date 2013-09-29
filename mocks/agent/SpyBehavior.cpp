@@ -1,6 +1,7 @@
 #include "SpyBehavior.h"
 
-SpyBehavior::SpyBehavior(const unsigned int id) : Behavior(id)
+SpyBehavior::SpyBehavior(const unsigned int behavior_id)
+    : Behavior(behavior_id)
 {
     this->activation = true;
     this->init_state = false;
@@ -46,12 +47,12 @@ void SpyBehavior::perform()
         perform_state = false;
 }
 
-const bool SpyBehavior::isActive() const
+bool SpyBehavior::isActive() const
 {
     return activation && sensing_state;
 }
 
-void SpyBehavior::setActivation(const bool activation)
+void SpyBehavior::setActivation(const bool new_activation)
 {
-    this->activation = activation;
+    this->activation = new_activation;
 }

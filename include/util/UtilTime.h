@@ -9,8 +9,8 @@ private:
     typedef boost::xtime::xtime_sec_t util_sec;
     typedef boost::xtime::xtime_nsec_t util_nsec;
 
-    const util_sec add_sec(const UtilTime& base, const UtilTime& addition) const;
-    const util_nsec add_nsec(const UtilTime& base, const UtilTime& addition) const;
+    util_sec add_sec(const UtilTime& base, const UtilTime& addition) const;
+    util_nsec add_nsec(const UtilTime& base, const UtilTime& addition) const;
 
     const UtilTime convert_time(const double& time) const;
 

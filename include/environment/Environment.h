@@ -24,6 +24,6 @@ public:
     void addSensor(const std::string& name, const SensorPtr& sensor);
 
     const SensorPtr getSensorByName(const std::string& name) const;
-    const int getNumSensor() const;
+    int getNumSensor() const;
 };
 #endif
