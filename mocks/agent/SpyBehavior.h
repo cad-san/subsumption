@@ -18,7 +18,7 @@ public:
     void sensing();
     void perform();
 
-    const bool isActive() const;
+    bool isActive() const;
 
     bool initialized();
     bool sensed();

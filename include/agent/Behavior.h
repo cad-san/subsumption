@@ -18,9 +18,9 @@ public:
     virtual void sensing() = 0;
     virtual void perform() = 0;
 
-    virtual const bool isActive() const = 0;
+    virtual bool isActive() const = 0;
 
-    const unsigned int getID() const { return id; }
+    unsigned int getID() const { return id; }
 };
 
 typedef boost::shared_ptr<Behavior> BehaviorPtr;

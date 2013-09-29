@@ -46,7 +46,7 @@ void SpyBehavior::perform()
         perform_state = false;
 }
 
-const bool SpyBehavior::isActive() const
+bool SpyBehavior::isActive() const
 {
     return activation && sensing_state;
 }

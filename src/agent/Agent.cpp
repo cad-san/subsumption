@@ -39,7 +39,7 @@ void Agent::step()
     behaviors.at(active_behavior)->perform();
 }
 
-const int Agent::getNumBehaviors() const
+int Agent::getNumBehaviors() const
 {
     return behaviors.size();
 }
@@ -85,7 +85,7 @@ const BehaviorPtr Agent::getBehaviorByID(const unsigned int id) const
     return behaviors.at(static_cast<unsigned int>(layer));
 }
 
-const int Agent::convertFromIDtoLayer(unsigned int id) const
+int Agent::convertFromIDtoLayer(unsigned int id) const
 {
     // 対象のIDを走査する
     for(unsigned int i = 0; i < behaviors.size(); i++)
@@ -97,7 +97,7 @@ const int Agent::convertFromIDtoLayer(unsigned int id) const
     return INVALID_LAYER;
 }
 
-const bool Agent::isValidLayer(const unsigned int layer) const
+bool Agent::isValidLayer(const unsigned int layer) const
 {
     return (layer < behaviors.size());
 }
