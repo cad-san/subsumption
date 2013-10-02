@@ -1,8 +1,10 @@
 #include "ThreadedSensor.h"
 
-ThreadedSensor::ThreadedSensor(const std::string& name, const ControllerPtr& controller) : Sensor(name),
-    controllPtr(controller),
-    thread(controller)
+ThreadedSensor::ThreadedSensor(const std::string& name,
+                               const ControllerPtr& controller_ptr)
+    : Sensor(name),
+      controller(controller_ptr),
+      thread(controller_ptr)
 {
 }
 
