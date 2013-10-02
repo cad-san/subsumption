@@ -8,11 +8,11 @@
 class ThreadedSensor : public Sensor
 {
 private:
-    ControllerPtr controllPtr;
+    ControllerPtr controller;
     Thread thread;
 
 public:
-    ThreadedSensor(const std::string& name, const ControllerPtr& controller);
+    ThreadedSensor(const std::string& name, const ControllerPtr& controller_ptr);
     virtual ~ThreadedSensor();
 
     bool init();
