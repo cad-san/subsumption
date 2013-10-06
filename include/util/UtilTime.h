@@ -1,6 +1,7 @@
 #ifndef D_UTIL_TIME_H
 #define D_UTIL_TIME_H
 
+#include <boost/thread.hpp>
 #include <boost/thread/xtime.hpp>
 
 struct UtilTime : boost::xtime
