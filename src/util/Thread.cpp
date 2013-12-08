@@ -41,6 +41,10 @@ bool Thread::init()
 
 bool Thread::start()
 {
+    /* Activeのとき無効 */
+    if(isActive())
+        return false;
+
     /* 未初期化時無効 */
     if(!isReady())
         return false;

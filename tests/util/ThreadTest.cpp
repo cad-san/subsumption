@@ -80,6 +80,18 @@ TEST(Thread, StartWithoutInit)
     CHECK_EQUAL(false, runner->performed());
 }
 
+TEST(Thread, StartUntilActive)
+{
+    CHECK_EQUAL(true, thread->init());
+    CHECK_EQUAL(true, thread->isReady());
+
+    CHECK_EQUAL(true, thread->start());
+    CHECK_EQUAL(true, thread->isActive());
+
+    CHECK_EQUAL(false, thread->start());
+    CHECK_EQUAL(true, thread->isActive());
+}
+
 TEST(Thread, StopWithoutStart)
 {
     CHECK_EQUAL(true, thread->init());
