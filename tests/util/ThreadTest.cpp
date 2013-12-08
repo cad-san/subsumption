@@ -129,3 +129,16 @@ TEST(Thread, InitAfterStarted)
 
     CHECK_EQUAL(true, thread->stop());
 }
+
+TEST(Thread, Start2ndTime)
+{
+    CHECK_EQUAL(true, thread->init());
+    CHECK_EQUAL(true, thread->start());
+    CHECK_EQUAL(true, thread->stop());
+
+    CHECK_EQUAL(true, thread->start());
+    CHECK_EQUAL(true, thread->isActive());
+
+    CHECK_EQUAL(true, thread->stop());
+    CHECK_EQUAL(false, thread->isActive());
+}

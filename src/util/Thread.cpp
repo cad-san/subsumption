@@ -100,6 +100,8 @@ void Thread::requestStarting()
     if(!isReady())
         return;
 
+    lock lk(message_guard);
+    this->end_flag = false;
     this->main_thread = ThreadPtr(new boost::thread(&Thread::main, this));
 }
 
