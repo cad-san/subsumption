@@ -41,6 +41,10 @@ bool Thread::init()
 
 bool Thread::start()
 {
+    /* Activeのとき無効 */
+    if(isActive())
+        return false;
+
     /* 未初期化時無効 */
     if(!isReady())
         return false;
@@ -96,6 +100,8 @@ void Thread::requestStarting()
     if(!isReady())
         return;
 
+    lock lk(message_guard);
+    this->end_flag = false;
     this->main_thread = ThreadPtr(new boost::thread(&Thread::main, this));
 }
 
