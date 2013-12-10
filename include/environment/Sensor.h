@@ -2,6 +2,7 @@
 #define D_SENSOR_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 
 class Sensor
 {
