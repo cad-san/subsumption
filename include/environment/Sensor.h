@@ -2,6 +2,7 @@
 #define D_SENSOR_H
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 
 class Sensor
 {
@@ -23,5 +24,7 @@ public:
 
     const std::string getName() const { return sensor_name; }
 };
+
+typedef boost::shared_ptr<Sensor> SensorPtr;
 
 #endif
