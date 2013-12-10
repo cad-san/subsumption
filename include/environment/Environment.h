@@ -6,12 +6,11 @@
 #include <map>
 #include <boost/shared_ptr.hpp>
 
-typedef boost::shared_ptr<Sensor> SensorPtr;
-typedef std::map< std::string, SensorPtr > SensorList;
-
 class Environment
 {
 private:
+    typedef std::map< std::string, SensorPtr > SensorList;
+
     SensorList sensor_list;
 public:
     Environment();
@@ -26,4 +25,7 @@ public:
     const SensorPtr getSensorByName(const std::string& name) const;
     int getNumSensor() const;
 };
+
+typedef boost::shared_ptr<Environment> EnvironmentPtr;
+
 #endif

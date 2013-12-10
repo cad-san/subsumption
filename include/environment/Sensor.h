@@ -24,4 +24,6 @@ public:
     const std::string getName() const { return sensor_name; }
 };
 
+typedef boost::shared_ptr<Sensor> SensorPtr;
+
 #endif

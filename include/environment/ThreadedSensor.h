@@ -25,4 +25,6 @@ public:
     void setIntervalMiliSec(const int interval_msec);
 };
 
+typedef boost::shared_ptr<ThreadedSensor> ThreadedSensorPtr;
+
 #endif
