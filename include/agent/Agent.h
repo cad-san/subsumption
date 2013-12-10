@@ -30,4 +30,6 @@ public:
     const BehaviorPtr getBehaviorByID(const unsigned int id) const;
 };
 
+typedef boost::shared_ptr<Agent> AgentPtr;
+
 #endif
