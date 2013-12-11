@@ -20,8 +20,8 @@ public:
     Agent();
     virtual ~Agent();
 
-    void init();
-    void step();
+    virtual void init();
+    virtual void step();
 
     int getNumBehaviors() const;
     void addBehavior(const BehaviorPtr& new_behavior);
