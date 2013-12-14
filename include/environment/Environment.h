@@ -11,7 +11,7 @@ class Environment
 private:
     typedef std::map< std::string, SensorPtr > SensorList;
 
-    SensorList sensor_list;
+    SensorList sensor_list_;
 public:
     Environment();
     virtual ~Environment();

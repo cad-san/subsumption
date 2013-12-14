@@ -10,11 +10,11 @@ class MockAgent : public Agent
 private:
     typedef boost::mutex::scoped_lock lock;
 
-    boost::mutex message_guard;
-    boost::condition_variable_any condition_performed;
+    boost::mutex message_guard_;
+    boost::condition_variable_any condition_performed_;
 
-    bool performed_flag;
-    bool initialized_flag;
+    bool performed_flag_;
+    bool initialized_flag_;
 
 public:
     MockAgent();

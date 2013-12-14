@@ -6,10 +6,10 @@
 class SpyBehavior : public Behavior
 {
 private:
-    bool activation;
-    bool init_state;
-    bool sensing_state;
-    bool perform_state;
+    bool activation_;
+    bool init_state_;
+    bool sensing_state_;
+    bool perform_state_;
 public:
     explicit SpyBehavior(const unsigned int behavior_id);
     ~SpyBehavior();

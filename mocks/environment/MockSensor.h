@@ -7,8 +7,8 @@
 class MockSensor : public Sensor
 {
 private:
-    bool ready_flag;
-    bool active_flag;
+    bool ready_flag_;
+    bool active_flag_;
 public:
     MockSensor(const std::string& name);
     ~MockSensor();

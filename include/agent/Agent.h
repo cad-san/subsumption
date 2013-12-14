@@ -12,7 +12,7 @@ class Agent : public Runner
 public:
     static const int INVALID_LAYER;
 private:
-    std::vector< BehaviorPtr > behaviors;
+    std::vector< BehaviorPtr > behaviors_;
 
     int convertFromIDtoLayer(const unsigned int id) const;
     bool isValidLayer(const unsigned int layer) const;

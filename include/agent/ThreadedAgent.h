@@ -10,8 +10,8 @@
 class ThreadedAgent
 {
 private:
-    AgentPtr agent;
-    Thread thread;
+    AgentPtr agent_;
+    Thread thread_;
 
 public:
     ThreadedAgent(const AgentPtr& agent_ptr);
