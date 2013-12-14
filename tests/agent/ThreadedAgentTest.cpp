@@ -5,13 +5,15 @@
 #include "UtilTime.h"
 #include "ThreadedAgent.h"
 
+#include <boost/make_shared.hpp>
+
 TEST_GROUP(ThreadedAgent)
 {
     MockAgentPtr agent;
     ThreadedAgent* threaded_agent;
     void setup()
     {
-        agent = MockAgentPtr(new MockAgent());
+        agent = boost::make_shared<MockAgent>();
         threaded_agent = new ThreadedAgent(agent);
     }
 

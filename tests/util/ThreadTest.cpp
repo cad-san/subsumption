@@ -2,6 +2,8 @@
 #include "Thread.h"
 #include "MockRunner.h"
 
+#include <boost/make_shared.hpp>
+
 TEST_GROUP(Thread)
 {
     MockRunnerPtr runner;
@@ -9,7 +11,7 @@ TEST_GROUP(Thread)
 
     void setup()
     {
-        runner = MockRunnerPtr(new MockRunner());
+        runner = boost::make_shared<MockRunner>();
         thread = new Thread(runner);
     }
 
