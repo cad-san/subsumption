@@ -1,8 +1,8 @@
 #include "ThreadedAgent.h"
 
 ThreadedAgent::ThreadedAgent(const AgentPtr& agent_ptr)
-    : agent(agent_ptr),
-      thread(agent)
+    : agent_(agent_ptr),
+      thread_(agent_)
 {
 }
 
@@ -12,30 +12,30 @@ ThreadedAgent::~ThreadedAgent()
 
 bool ThreadedAgent::init()
 {
-    return thread.init();
+    return thread_.init();
 }
 
 bool ThreadedAgent::start()
 {
-    return thread.start();
+    return thread_.start();
 }
 
 bool ThreadedAgent::stop()
 {
-    return thread.stop();
+    return thread_.stop();
 }
 
 bool ThreadedAgent::isReady() const
 {
-    return thread.isReady();
+    return thread_.isReady();
 }
 
 bool ThreadedAgent::isActive() const
 {
-    return thread.isActive();
+    return thread_.isActive();
 }
 
 void ThreadedAgent::setIntervalMiliSec(const int interval_msec)
 {
-    thread.setIntervalMiliSec(interval_msec);
+    thread_.setIntervalMiliSec(interval_msec);
 }
