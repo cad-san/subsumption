@@ -40,3 +40,9 @@ You'll need to the following to get stared:
 
 Now there is **ONLY** test cord to develop this library.
 Samples for using library will be made soon.
+
+## License
+
+[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
+
+Copyright (c) 2013 cad-san
