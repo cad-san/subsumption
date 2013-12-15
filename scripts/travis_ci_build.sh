@@ -3,12 +3,12 @@
 
 if [ "$BUILD_TARGET" = "test" ]; then
     if [ "$CC" = "gcc" ]; then
-        make gcov;
+        make gcov || exit 1
     else
-        make test;
+        make test || exit 1
     fi
 fi
 
 if [ "$BUILD_TARGET" = "release" ]; then
-	make release
+	make release || exit 1
 fi
