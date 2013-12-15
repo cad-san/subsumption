@@ -1,5 +1,5 @@
 # this is set up to by default to make the top level and test with CppUTest
-all: test
+all: release
 
 clean:
 	@if [ -e cpputest/Makefile_using_MakefileWorker ]; \
