@@ -11,7 +11,7 @@ test: CppUTest CppUTestExt
 	make -f scripts/MakefileCppUTest.mk
 
 gcov: CppUTest CppUTestExt clean
-	make -f scripts/MakefileCppUTest.mk gcov
+	make -f scripts/MakefileCppUTest.mk CPPUTEST_USE_GCOV=Y gcov
 
 cleanTest:
 	make -i -f scripts/MakefileCppUTest.mk clean
