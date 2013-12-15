@@ -14,18 +14,11 @@ So you can make the concrete implements wheather physical robot or simulator.
 
 You'll need to the following to get stared:
 
-* install boost library(with boost::thread)
+* install boost library(with boost::thread, boost::system)
 * download latest version
 
 ```
  $ git clone git://github.com/cad-san/subsumption.git
-```
-
-* download cpputest
-
-```
- $ git submodule init
- $ git submodule update
 ```
 
 * make library
@@ -34,12 +27,30 @@ You'll need to the following to get stared:
  $ make
 ```
 
+## How to use
+
+I'm sorry that now there is **ONLY** test cord to develop this library (x_x)
+
+Samples for using library will be made soon.
+
 ----
 
-**BUT**, I'm sorry that this libray is in the process of production (x_x)
+## Test this library
 
-Now there is **ONLY** test cord to develop this library.
-Samples for using library will be made soon.
+If you want to test this library, you'll need to the following procedure.
+
+* download cpputest
+
+```
+ $ git submodule init
+ $ git submodule update
+```
+
+* command make test
+
+```
+ $ make test
+```
 
 ## License
 
