@@ -13,7 +13,6 @@ CPPUTEST_WARNINGFLAGS = -Wall -W -Werror -pedantic-errors\
 CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
 LD_LIBRARIES = -lpthread -lboost_thread-mt -lboost_system-mt
 
-CPPUTEST_USE_GCOV = Y
 CPPUTEST_USE_EXTENSIONS = Y
 
 include $(CPPUTEST_HOME)/build/MakefileWorker.mk
