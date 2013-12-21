@@ -4,9 +4,9 @@
 static const int INTERVAL_TIME = 500;
 
 #if BOOST_VERSION >= 105000
-#define TIME_UTC boost::TIME_UTC_
+#define THREAD_TIME_SCALE boost::TIME_UTC_
 #else
-#define TIME_UTC boost::TIME_UTC
+#define THREAD_TIME_SCALE boost::TIME_UTC
 #endif
 
 Thread::Thread(const RunnerPtr& runner_ptr)
@@ -180,7 +180,7 @@ const UtilTime Thread::getIntervalTime() const
 const UtilTime Thread::getBaseTime() const
 {
     UtilTime base;
-    boost::xtime_get(&base, TIME_UTC);
+    boost::xtime_get(&base, THREAD_TIME_SCALE);
     return base;
 }
 
