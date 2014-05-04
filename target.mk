@@ -37,6 +37,12 @@ MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks/environment\
 	$(PROJECT_HOME_DIR)/mocks/util\
 
+#--- Librarys ---#
+LIBRARY_DIRS = \
+
+LIBRARY_FILES = \
+	-lboost_thread-mt -lboost_system-mt
+
 #--- Configs ---#
 
 CPPWARNINGFLAGS = \

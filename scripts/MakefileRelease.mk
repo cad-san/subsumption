@@ -28,7 +28,7 @@ SRCS += $(call get_src_from_dir_list, $(SRC_DIRS)) $(SRC_FILES)
 OBJS = $(call src_to_o,$(SRCS))
 
 CPPFLAGS += $(INCLUDES) $(CPPWARNINGFLAGS)
-LDFLAGS  = -lboost_thread-mt -lboost_system-mt
+LDFLAGS  = $(LIBRARY_FILES)
 
 all: $(TARGET)
 
