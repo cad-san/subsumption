@@ -36,3 +36,10 @@ MOCKS_SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/mocks/agent\
 	$(PROJECT_HOME_DIR)/mocks/environment\
 	$(PROJECT_HOME_DIR)/mocks/util\
+
+#--- Configs ---#
+
+CPPWARNINGFLAGS = \
+	-Wall -W -Werror -pedantic-errors\
+	-Wcast-qual -Wcast-align -Wwrite-strings\
+	-Wconversion -Wfloat-equal -Wpointer-arith\
