@@ -7,11 +7,11 @@ SILENCE = @
 include target.mk
 
 #---- Setting ----#
-CPPUTEST_WARNINGFLAGS = -Wall -W -Werror -pedantic-errors\
-                        -Wcast-qual -Wcast-align -Wwrite-strings\
-                        -Wconversion -Wfloat-equal -Wpointer-arith
+CPPUTEST_WARNINGFLAGS = $(CPPWARNINGFLAGS)
+
 CPPUTEST_CXXFLAGS += -include tests/PreIncludeFiles.h
-LD_LIBRARIES = -lpthread -lboost_thread-mt -lboost_system-mt
+CPPUTEST_LDFLAGS += $(LIBRARY_DIRS)
+LD_LIBRARIES = $(LIBRARY_FILES)
 
 CPPUTEST_USE_EXTENSIONS = Y
 
